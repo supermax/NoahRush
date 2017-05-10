@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: ac9fd2c0f76fd454d917c3259f9bb579
+labels:
+- Arcade
+- Coin
+- Environment
+- Game
+- Runner
+- Star
+- Subway
+- Track
+timeCreated: 1485255204
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
