@@ -4,6 +4,11 @@
 public class LevelTemplate : ScriptableObject
 {
 	[SerializeField]
+	public GameObject DefaultPrefab;
+
+	internal GameObject[] DefaultPrefabs;
+
+	[SerializeField]
 	public GameObject[] TrapPrefabs;
 
 	[SerializeField]

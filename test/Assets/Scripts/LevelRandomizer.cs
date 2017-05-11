@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMS.Common.Extensions;
+using Object = UnityEngine.Object;
 
 public class LevelRandomizer : TMS.Common.Core.MonoBehaviourBase
 {
@@ -26,14 +27,29 @@ public class LevelRandomizer : TMS.Common.Core.MonoBehaviourBase
 		var trapPrefabs = _cache.TrapPrefabs.RandomShuffle();
 
 		var gapIdx = 0;
+		var defIdx = 0;
 		var levelPrefabs = new List<GameObject>(startPrefabs);
 		foreach (var prefab in trapPrefabs)
 		{
 			levelPrefabs.Add(prefab);
 
+			if (defIdx < _cache.DefaultPrefabs.Length)
+			{
+				var defPrefab = _cache.DefaultPrefabs[defIdx++];
+				levelPrefabs.Add(defPrefab);
+			}
+
 			if(gapIdx >= gapPrefabs.GetLength()) continue;
 			var gapPrefab = gapPrefabs.ElementAt(gapIdx++);
 			levelPrefabs.Add(gapPrefab);
+		}
+
+		if (gapIdx < gapPrefabs.GetLength() - 1)
+		{
+			for (; gapIdx < gapPrefabs.GetLength(); gapIdx++)
+			{
+				levelPrefabs.Add(gapPrefabs.ElementAt(gapIdx));
+			}
 		}
 
 		Arrange(levelPrefabs, gameObject.transform.position, _cache.PrefabPosition);
@@ -46,6 +62,8 @@ public class LevelRandomizer : TMS.Common.Core.MonoBehaviourBase
 		clone.TrapPrefabs = Clone(source.TrapPrefabs, parentTransform);
 		clone.GapPrefabs = Clone(source.GapPrefabs, parentTransform);
 		clone.StartPrefabs = Clone(source.StartPrefabs, parentTransform);
+		clone.DefaultPrefabs = Clone(source.DefaultPrefab, 
+			clone.TrapPrefabs.Length + clone.GapPrefabs.Length, parentTransform);
 
 		clone.PrefabPosition = source.PrefabPosition;
 
@@ -59,6 +77,17 @@ public class LevelRandomizer : TMS.Common.Core.MonoBehaviourBase
 		for (var i = 0; i < clonedPrefabs.Length; i++)
 		{
 			clonedPrefabs[i] = (GameObject)Instantiate(prefabs.GetElementAt(i), parentTransform);
+		}
+		return clonedPrefabs;
+	}
+
+	private static GameObject[] Clone(Object prefab, int count,
+		Transform parentTransform)
+	{
+		var clonedPrefabs = new GameObject[count];
+		for (var i = 0; i < clonedPrefabs.Length; i++)
+		{
+			clonedPrefabs[i] = (GameObject)Instantiate(prefab, parentTransform);
 		}
 		return clonedPrefabs;
 	}
