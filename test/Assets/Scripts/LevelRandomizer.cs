@@ -1,42 +1,69 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMS.Common.Extensions;
 
 public class LevelRandomizer : TMS.Common.Core.MonoBehaviourBase
 {
-	[SerializeField] public LevelCache Prefabs;
+	[SerializeField] public LevelTemplate Prefabs;
 
-	private LevelCache _cache;
+	private LevelTemplate _cache;
 
 	protected override void Start()
 	{
 		base.Start();
 
-		_cache = ScriptableObject.CreateInstance<LevelCache>();
-		_cache.Prefabs = Clone(Prefabs.Prefabs, gameObject.transform);
-		_cache.DefaultPrefabs = Clone(Prefabs.DefaultPrefabs, gameObject.transform);
-		_cache.PrefabPosition = Prefabs.PrefabPosition;
-
-		var lastPos = Arrange(_cache.DefaultPrefabs, gameObject.transform.position, _cache.PrefabPosition);
-		Arrange(_cache.Prefabs, lastPos, _cache.PrefabPosition);
-
-		//var prefabs = Randomize(_prefabs);
-		//Arrange(prefabs);
+		_cache = Clone(Prefabs, gameObject.transform);
+		BuildLevel(_cache);
 	}
 
-	private static GameObject[] Clone(IList<GameObject> prefabs, 
+	private void BuildLevel(LevelTemplate template)
+	{
+		var startPrefabs = template.StartPrefabs.RandomShuffle();
+		var gapPrefabs = template.GapPrefabs.RandomShuffle();
+		var trapPrefabs = _cache.TrapPrefabs.RandomShuffle();
+
+		var gapIdx = 0;
+		var levelPrefabs = new List<GameObject>(startPrefabs);
+		foreach (var prefab in trapPrefabs)
+		{
+			levelPrefabs.Add(prefab);
+
+			if(gapIdx >= gapPrefabs.GetLength()) continue;
+			var gapPrefab = gapPrefabs.ElementAt(gapIdx++);
+			levelPrefabs.Add(gapPrefab);
+		}
+
+		Arrange(levelPrefabs, gameObject.transform.position, _cache.PrefabPosition);
+	}
+
+	private static LevelTemplate Clone(LevelTemplate source, Transform parentTransform)
+	{
+		var clone = ScriptableObject.CreateInstance<LevelTemplate>();
+
+		clone.TrapPrefabs = Clone(source.TrapPrefabs, parentTransform);
+		clone.GapPrefabs = Clone(source.GapPrefabs, parentTransform);
+		clone.StartPrefabs = Clone(source.StartPrefabs, parentTransform);
+
+		clone.PrefabPosition = source.PrefabPosition;
+
+		return clone;
+	}
+
+	private static GameObject[] Clone(IEnumerable<GameObject> prefabs, 
 		Transform parentTransform)
 	{
-		var clonedPrefabs = new GameObject[prefabs.Count];
-		for (var i = 0; i < prefabs.Count; i++)
+		var clonedPrefabs = new GameObject[prefabs.GetLength()];
+		for (var i = 0; i < clonedPrefabs.Length; i++)
 		{
-			clonedPrefabs[i] = (GameObject)Instantiate(prefabs[i], parentTransform);
+			clonedPrefabs[i] = (GameObject)Instantiate(prefabs.GetElementAt(i), parentTransform);
 		}
 		return clonedPrefabs;
 	}
 
-	private static Vector3 Arrange(IEnumerable<GameObject> prefabs, 
+	private static void Arrange(IEnumerable<GameObject> prefabs, 
 		Vector3 initPos, Vector3 prefabPosition)
 	{
 		var prevPrefabPos = initPos;
@@ -48,20 +75,5 @@ public class LevelRandomizer : TMS.Common.Core.MonoBehaviourBase
 
 			prevPrefabPos += prefabPosition;
 		}
-
-		return prevPrefabPos;
-	}
-
-	private static GameObject[] Randomize(GameObject[] prefabs)
-	{
-		if(prefabs.IsNullOrEmpty()) return null;
-
-		//var lst = new List<GameObject>();
-		//while (true)
-		//{
-			
-		//}
-
-		return prefabs;
 	}
 }
