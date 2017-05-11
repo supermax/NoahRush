@@ -1,0 +1,316 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F96E0787-DF81-0979-2B6A-18AE3634D852}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
+    <CompilerResponseFile></CompilerResponseFile>
+    <UnityProjectType>Game:1</UnityProjectType>
+    <UnityBuildTarget>Android:13</UnityBuildTarget>
+    <UnityVersion>5.4.3f1</UnityVersion>
+    <RootNamespace></RootNamespace>
+    <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\UnityVS_bin\Debug\</OutputPath>
+    <IntermediateOutputPath>Temp\UnityVS_obj\Debug\</IntermediateOutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_4_3;UNITY_5_4;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EDITOR_RETINA;ENABLE_RETINA_GUISTYLES;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_SPRITE_POLYGON;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;INCLUDE_PUBNUB;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;ENABLE_EDITOR_TESTS_RUNNER;UNITY_ANDROID;UNITY_ANDROID_API;ENABLE_SUBSTANCE;UNITY_ANDROID_API;ENABLE_TEXTUREID_MAP;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;PLATFORM_SUPPORTS_ADS_ID;UNITY_CAN_SHOW_SPLASH_SCREEN;ENABLE_UNITYADS_RUNTIME;UNITY_UNITYADS_API;ENABLE_MONO;DEVELOPMENT_BUILD;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;ENABLE_VSTU;UNITY_PRO_LICENSE;CROSS_PLATFORM_INPUT;UNITY3D;UNITY_3D</DefineConstants>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\UnityVS_bin\Release\</OutputPath>
+    <IntermediateOutputPath>Temp\UnityVS_obj\Release\</IntermediateOutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DefineConstants>TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_4_3;UNITY_5_4;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EDITOR_RETINA;ENABLE_RETINA_GUISTYLES;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_SPRITE_POLYGON;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;INCLUDE_PUBNUB;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;ENABLE_EDITOR_TESTS_RUNNER;UNITY_ANDROID;UNITY_ANDROID_API;ENABLE_SUBSTANCE;UNITY_ANDROID_API;ENABLE_TEXTUREID_MAP;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;PLATFORM_SUPPORTS_ADS_ID;UNITY_CAN_SHOW_SPLASH_SCREEN;ENABLE_UNITYADS_RUNTIME;UNITY_UNITYADS_API;ENABLE_MONO;DEVELOPMENT_BUILD;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;ENABLE_VSTU;UNITY_PRO_LICENSE;CROSS_PLATFORM_INPUT;UNITY3D;UNITY_3D</DefineConstants>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Core" />
+    <Reference Include="Boo.Lang" />
+    <Reference Include="UnityScript.Lang" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="UnityEngine">
+      <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.iOS.Extensions.Common">
+      <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Common.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="test.Plugins.csproj">
+      <Project>{1B67EF4C-0C4E-3B15-4052-B03DB4C6A78F}</Project>
+      <Name>test.Plugins</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assets\Scripts\DevObject.cs" />
+    <Compile Include="Assets\Scripts\EthanController.cs" />
+    <Compile Include="Assets\Scripts\LevelCache.cs" />
+    <Compile Include="Assets\Scripts\LevelRandomizer.cs" />
+    <Compile Include="Assets\TMS\Plugins\AppManager\AppInstanceCallbackEventArgs.cs" />
+    <Compile Include="Assets\TMS\Plugins\AppManager\AppInstanceManager.cs" />
+    <Compile Include="Assets\TMS\Plugins\AppManager\AppInstanceScope.cs" />
+    <Compile Include="Assets\TMS\Plugins\Cache\DictionaryCache.cs" />
+    <Compile Include="Assets\TMS\Plugins\Config\BaseConfiguration.cs" />
+    <Compile Include="Assets\TMS\Plugins\Config\IBaseConfiguration.cs" />
+    <Compile Include="Assets\TMS\Plugins\Converters\BooleanToOpacityConverter.cs" />
+    <Compile Include="Assets\TMS\Plugins\Converters\CountProvider.cs" />
+    <Compile Include="Assets\TMS\Plugins\Converters\DummyValueConverter.cs" />
+    <Compile Include="Assets\TMS\Plugins\Converters\IValueConverter.cs" />
+    <Compile Include="Assets\TMS\Plugins\Converters\PropertyPathConverter.cs" />
+    <Compile Include="Assets\TMS\Plugins\Converters\ScalarValueConverter.cs" />
+    <Compile Include="Assets\TMS\Plugins\Converters\StringFormatConverter.cs" />
+    <Compile Include="Assets\TMS\Plugins\Converters\ViewModelToViewConverter.cs" />
+    <Compile Include="Assets\TMS\Plugins\Core\DelegateCommand.cs" />
+    <Compile Include="Assets\TMS\Plugins\Core\DelegateCommandInspector.cs" />
+    <Compile Include="Assets\TMS\Plugins\Core\DelegatePayloadBase.cs" />
+    <Compile Include="Assets\TMS\Plugins\Core\DelegateReference.cs" />
+    <Compile Include="Assets\TMS\Plugins\Core\DispatcherProxy.cs" />
+    <Compile Include="Assets\TMS\Plugins\Core\ElementStateManager.cs" />
+    <Compile Include="Assets\TMS\Plugins\Core\IActiveAware.cs" />
+    <Compile Include="Assets\TMS\Plugins\Core\ICommand.cs" />
+    <Compile Include="Assets\TMS\Plugins\Core\IDispatcherProxy.cs" />
+    <Compile Include="Assets\TMS\Plugins\Core\IInputDispatcher.cs" />
+    <Compile Include="Assets\TMS\Plugins\Core\IInputListener.cs" />
+    <Compile Include="Assets\TMS\Plugins\Core\IMapContainer.cs" />
+    <Compile Include="Assets\TMS\Plugins\Core\INotifyCollectionChanged.cs" />
+    <Compile Include="Assets\TMS\Plugins\Core\IObservable.cs" />
+    <Compile Include="Assets\TMS\Plugins\Core\IView.cs" />
+    <Compile Include="Assets\TMS\Plugins\Core\IViewModel.cs" />
+    <Compile Include="Assets\TMS\Plugins\Core\InputBlockDelegateCommand.cs" />
+    <Compile Include="Assets\TMS\Plugins\Core\InputDispatcher.cs" />
+    <Compile Include="Assets\TMS\Plugins\Core\MonoBehaviorBase.cs" />
+    <Compile Include="Assets\TMS\Plugins\Core\MonoBehaviorBaseSingleton.cs" />
+    <Compile Include="Assets\TMS\Plugins\Core\NetworkEventPayload.cs" />
+    <Compile Include="Assets\TMS\Plugins\Core\Observable.cs" />
+    <Compile Include="Assets\TMS\Plugins\Core\ObservableCollectionEx.cs" />
+    <Compile Include="Assets\TMS\Plugins\Core\ObservableDictionary.cs" />
+    <Compile Include="Assets\TMS\Plugins\Core\ObservableSingleton.cs" />
+    <Compile Include="Assets\TMS\Plugins\Core\ObservableSortedDictionary.cs" />
+    <Compile Include="Assets\TMS\Plugins\Core\Singleton.cs" />
+    <Compile Include="Assets\TMS\Plugins\Core\Tuple.cs" />
+    <Compile Include="Assets\TMS\Plugins\Core\U3DList.cs" />
+    <Compile Include="Assets\TMS\Plugins\Core\ViewModel.cs" />
+    <Compile Include="Assets\TMS\Plugins\Core\ViewModelLocator.cs" />
+    <Compile Include="Assets\TMS\Plugins\Core\ViewModelSingleton.cs" />
+    <Compile Include="Assets\TMS\Plugins\Core\WeakDelegatesManager.cs" />
+    <Compile Include="Assets\TMS\Plugins\Cryptography\ABCDStruct.cs" />
+    <Compile Include="Assets\TMS\Plugins\Cryptography\Crc32.cs" />
+    <Compile Include="Assets\TMS\Plugins\Cryptography\MD5Core.cs" />
+    <Compile Include="Assets\TMS\Plugins\Cryptography\MD5Managed.cs" />
+    <Compile Include="Assets\TMS\Plugins\EventArguments\GenericEventArgs.cs" />
+    <Compile Include="Assets\TMS\Plugins\EventArguments\InputEventArgs.cs" />
+    <Compile Include="Assets\TMS\Plugins\EventArguments\InputTypes.cs" />
+    <Compile Include="Assets\TMS\Plugins\Extensions\ActionExtensions.cs" />
+    <Compile Include="Assets\TMS\Plugins\Extensions\ArgumentValidator.cs" />
+    <Compile Include="Assets\TMS\Plugins\Extensions\CollectionExtensions.cs" />
+    <Compile Include="Assets\TMS\Plugins\Extensions\CommonExtensions.cs" />
+    <Compile Include="Assets\TMS\Plugins\Extensions\CustomTaskExtensions.cs" />
+    <Compile Include="Assets\TMS\Plugins\Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Assets\TMS\Plugins\Extensions\DelegateExtensions.cs" />
+    <Compile Include="Assets\TMS\Plugins\Extensions\DispatcherExtensions.cs" />
+    <Compile Include="Assets\TMS\Plugins\Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Assets\TMS\Plugins\Extensions\EnumeratorExtensions.cs" />
+    <Compile Include="Assets\TMS\Plugins\Extensions\GameObjectExtensions.cs" />
+    <Compile Include="Assets\TMS\Plugins\Extensions\MonoBehaviourExtensions.cs" />
+    <Compile Include="Assets\TMS\Plugins\Extensions\ObjectExtensions.cs" />
+    <Compile Include="Assets\TMS\Plugins\Extensions\StoryboardExtensions.cs" />
+    <Compile Include="Assets\TMS\Plugins\Extensions\TypeExtensions.cs" />
+    <Compile Include="Assets\TMS\Plugins\Extensions\UriExtensions.cs" />
+    <Compile Include="Assets\TMS\Plugins\Extensions\WaitOneExtensions.cs" />
+    <Compile Include="Assets\TMS\Plugins\Helpers\AnimationHelper.cs" />
+    <Compile Include="Assets\TMS\Plugins\Helpers\AssemblyInfoHelper.cs" />
+    <Compile Include="Assets\TMS\Plugins\Helpers\DataMapper.cs" />
+    <Compile Include="Assets\TMS\Plugins\Helpers\DefaultValues.cs" />
+    <Compile Include="Assets\TMS\Plugins\Helpers\DeviceInfo.cs" />
+    <Compile Include="Assets\TMS\Plugins\Helpers\EasingFunctions.cs" />
+    <Compile Include="Assets\TMS\Plugins\Helpers\EnumHelper.cs" />
+    <Compile Include="Assets\TMS\Plugins\Helpers\ILocalStorage.cs" />
+    <Compile Include="Assets\TMS\Plugins\Helpers\IOHelper.cs" />
+    <Compile Include="Assets\TMS\Plugins\Helpers\IWebView.cs" />
+    <Compile Include="Assets\TMS\Plugins\Helpers\InputState.cs" />
+    <Compile Include="Assets\TMS\Plugins\Helpers\LocalStorage.cs" />
+    <Compile Include="Assets\TMS\Plugins\Helpers\LoggerHelper.cs" />
+    <Compile Include="Assets\TMS\Plugins\Helpers\NullableProvider.cs" />
+    <Compile Include="Assets\TMS\Plugins\Helpers\PluginsUpdater.cs" />
+    <Compile Include="Assets\TMS\Plugins\Helpers\ResourceItemsRandomizer.cs" />
+    <Compile Include="Assets\TMS\Plugins\Helpers\WindowSize.cs" />
+    <Compile Include="Assets\TMS\Plugins\Helpers\XmlHelper.cs" />
+    <Compile Include="Assets\TMS\Plugins\IO\Compression\GZipHelper.cs" />
+    <Compile Include="Assets\TMS\Plugins\IO\Compression\Unity.IO.Compression\BlockType.cs" />
+    <Compile Include="Assets\TMS\Plugins\IO\Compression\Unity.IO.Compression\CompressionMode.cs" />
+    <Compile Include="Assets\TMS\Plugins\IO\Compression\Unity.IO.Compression\CopyEncoder.cs" />
+    <Compile Include="Assets\TMS\Plugins\IO\Compression\Unity.IO.Compression\Crc32Helper.cs" />
+    <Compile Include="Assets\TMS\Plugins\IO\Compression\Unity.IO.Compression\DeflateInput.cs" />
+    <Compile Include="Assets\TMS\Plugins\IO\Compression\Unity.IO.Compression\DeflateStream.cs" />
+    <Compile Include="Assets\TMS\Plugins\IO\Compression\Unity.IO.Compression\DeflateStreamAsyncResult.cs" />
+    <Compile Include="Assets\TMS\Plugins\IO\Compression\Unity.IO.Compression\DeflaterManaged.cs" />
+    <Compile Include="Assets\TMS\Plugins\IO\Compression\Unity.IO.Compression\FastEncoder.cs" />
+    <Compile Include="Assets\TMS\Plugins\IO\Compression\Unity.IO.Compression\FastEncoderStatics.cs" />
+    <Compile Include="Assets\TMS\Plugins\IO\Compression\Unity.IO.Compression\FastEncoderWindow.cs" />
+    <Compile Include="Assets\TMS\Plugins\IO\Compression\Unity.IO.Compression\FileFormats.cs" />
+    <Compile Include="Assets\TMS\Plugins\IO\Compression\Unity.IO.Compression\GZipDecoder.cs" />
+    <Compile Include="Assets\TMS\Plugins\IO\Compression\Unity.IO.Compression\GZipStream.cs" />
+    <Compile Include="Assets\TMS\Plugins\IO\Compression\Unity.IO.Compression\GZipUtils.cs" />
+    <Compile Include="Assets\TMS\Plugins\IO\Compression\Unity.IO.Compression\HuffmanTree.cs" />
+    <Compile Include="Assets\TMS\Plugins\IO\Compression\Unity.IO.Compression\IDeflater.cs" />
+    <Compile Include="Assets\TMS\Plugins\IO\Compression\Unity.IO.Compression\Inflater.cs" />
+    <Compile Include="Assets\TMS\Plugins\IO\Compression\Unity.IO.Compression\InflaterState.cs" />
+    <Compile Include="Assets\TMS\Plugins\IO\Compression\Unity.IO.Compression\InputBuffer.cs" />
+    <Compile Include="Assets\TMS\Plugins\IO\Compression\Unity.IO.Compression\InvalidDataException.cs" />
+    <Compile Include="Assets\TMS\Plugins\IO\Compression\Unity.IO.Compression\Match.cs" />
+    <Compile Include="Assets\TMS\Plugins\IO\Compression\Unity.IO.Compression\MatchState.cs" />
+    <Compile Include="Assets\TMS\Plugins\IO\Compression\Unity.IO.Compression\OutputBuffer.cs" />
+    <Compile Include="Assets\TMS\Plugins\IO\Compression\Unity.IO.Compression\OutputWindow.cs" />
+    <Compile Include="Assets\TMS\Plugins\IO\Compression\Unity.IO.Compression\SR.cs" />
+    <Compile Include="Assets\TMS\Plugins\IO\TextFileHandler.cs" />
+    <Compile Include="Assets\TMS\Plugins\Imaging\AssetsPostprocessHandler.cs" />
+    <Compile Include="Assets\TMS\Plugins\Imaging\ImageHelper.cs" />
+    <Compile Include="Assets\TMS\Plugins\Imaging\Lanczos.cs" />
+    <Compile Include="Assets\TMS\Plugins\Imaging\SColor.cs" />
+    <Compile Include="Assets\TMS\Plugins\Imaging\ScaleImage.cs" />
+    <Compile Include="Assets\TMS\Plugins\Imaging\ScaleUnityTexture.cs" />
+    <Compile Include="Assets\TMS\Plugins\Imaging\ScreenshotHelper.cs" />
+    <Compile Include="Assets\TMS\Plugins\Logging\BaseLogger.cs" />
+    <Compile Include="Assets\TMS\Plugins\Logging\ConsoleLogger.cs" />
+    <Compile Include="Assets\TMS\Plugins\Logging\FileLogger.cs" />
+    <Compile Include="Assets\TMS\Plugins\Logging\ILogger.cs" />
+    <Compile Include="Assets\TMS\Plugins\Logging\LogSystemInfo.cs" />
+    <Compile Include="Assets\TMS\Plugins\Messaging\IBroadcastPayload.cs" />
+    <Compile Include="Assets\TMS\Plugins\Messaging\IMessenger.cs" />
+    <Compile Include="Assets\TMS\Plugins\Messaging\IMessengerConsumer.cs" />
+    <Compile Include="Assets\TMS\Plugins\Messaging\Messenger.cs" />
+    <Compile Include="Assets\TMS\Plugins\Messaging\MessengerConsumerAttribute.cs" />
+    <Compile Include="Assets\TMS\Plugins\Modularity\Bootstrapper.cs" />
+    <Compile Include="Assets\TMS\Plugins\Modularity\IBootstrapper.cs" />
+    <Compile Include="Assets\TMS\Plugins\Modularity\IIocManager.cs" />
+    <Compile Include="Assets\TMS\Plugins\Modularity\IModule.cs" />
+    <Compile Include="Assets\TMS\Plugins\Modularity\IocManager.cs" />
+    <Compile Include="Assets\TMS\Plugins\Modularity\IocTypeMapAttribute.cs" />
+    <Compile Include="Assets\TMS\Plugins\Modularity\MappingInfo.cs" />
+    <Compile Include="Assets\TMS\Plugins\Modularity\ModuleCatalog.cs" />
+    <Compile Include="Assets\TMS\Plugins\Modularity\ModuleInfo.cs" />
+    <Compile Include="Assets\TMS\Plugins\Modularity\Regions\Adapters\BaseRegionAdapter.cs" />
+    <Compile Include="Assets\TMS\Plugins\Modularity\Regions\Adapters\MultiContentRegionAdapter.cs" />
+    <Compile Include="Assets\TMS\Plugins\Modularity\Regions\Adapters\RegionAdapterHelper.cs" />
+    <Compile Include="Assets\TMS\Plugins\Modularity\Regions\Adapters\RegionViewWrapper.cs" />
+    <Compile Include="Assets\TMS\Plugins\Modularity\Regions\Adapters\SingleContentRegionAdapter.cs" />
+    <Compile Include="Assets\TMS\Plugins\Modularity\Regions\IRegion.cs" />
+    <Compile Include="Assets\TMS\Plugins\Modularity\Regions\IRegionAdapter.cs" />
+    <Compile Include="Assets\TMS\Plugins\Modularity\Regions\IRegionManager.cs" />
+    <Compile Include="Assets\TMS\Plugins\Modularity\Regions\IViewMapping.cs" />
+    <Compile Include="Assets\TMS\Plugins\Modularity\Regions\RegionMapping.cs" />
+    <Compile Include="Assets\TMS\Plugins\Modularity\Regions\RegionMappingType.cs" />
+    <Compile Include="Assets\TMS\Plugins\Modularity\Regions\RegionViewMappingPayload.cs" />
+    <Compile Include="Assets\TMS\Plugins\Modularity\Regions\RegionViewMappingType.cs" />
+    <Compile Include="Assets\TMS\Plugins\Modularity\Regions\ViewMapping.cs" />
+    <Compile Include="Assets\TMS\Plugins\Modularity\Regions\ViewMappingActionAttribute.cs" />
+    <Compile Include="Assets\TMS\Plugins\Modularity\Regions\ViewMappingAttribute.cs" />
+    <Compile Include="Assets\TMS\Plugins\Modularity\Regions\ViewRegionManager.cs" />
+    <Compile Include="Assets\TMS\Plugins\Network\BaseNetworkDispatcher.cs" />
+    <Compile Include="Assets\TMS\Plugins\Network\BaseNetworkServiceConfiguration.cs" />
+    <Compile Include="Assets\TMS\Plugins\Network\BaseServicePayload.cs" />
+    <Compile Include="Assets\TMS\Plugins\Network\BaseServiceRequestPayload.cs" />
+    <Compile Include="Assets\TMS\Plugins\Network\BaseServiceResponsePayload.cs" />
+    <Compile Include="Assets\TMS\Plugins\Network\INetworkDispatcher.cs" />
+    <Compile Include="Assets\TMS\Plugins\Network\INetworkDispatcherConfiguration.cs" />
+    <Compile Include="Assets\TMS\Plugins\Network\IServiceRequestTask.cs" />
+    <Compile Include="Assets\TMS\Plugins\Network\IServiceRequestTaskFactory.cs" />
+    <Compile Include="Assets\TMS\Plugins\Network\NetworkDispatcher.cs" />
+    <Compile Include="Assets\TMS\Plugins\Network\NetworkDispatcherConfiguration.cs" />
+    <Compile Include="Assets\TMS\Plugins\Network\NetworkRequestConfiguration.cs" />
+    <Compile Include="Assets\TMS\Plugins\Network\NetworkRequestConfigurationData.cs" />
+    <Compile Include="Assets\TMS\Plugins\Network\NetworkResponseConfiguration.cs" />
+    <Compile Include="Assets\TMS\Plugins\Network\ServicePayloadMapping.cs" />
+    <Compile Include="Assets\TMS\Plugins\Network\ServiceRequestTask.cs" />
+    <Compile Include="Assets\TMS\Plugins\Network\ServiceRequestTaskDispatcher.cs" />
+    <Compile Include="Assets\TMS\Plugins\Network\ServiceWatcher.cs" />
+    <Compile Include="Assets\TMS\Plugins\Properties\Resources.cs" />
+    <Compile Include="Assets\TMS\Plugins\Serialization\IsolatedStorageHelper.cs" />
+    <Compile Include="Assets\TMS\Plugins\Serialization\Json\ArrayMetadata.cs" />
+    <Compile Include="Assets\TMS\Plugins\Serialization\Json\Condition.cs" />
+    <Compile Include="Assets\TMS\Plugins\Serialization\Json\Delegates.cs" />
+    <Compile Include="Assets\TMS\Plugins\Serialization\Json\FsmContext.cs" />
+    <Compile Include="Assets\TMS\Plugins\Serialization\Json\IJsonWrapper.cs" />
+    <Compile Include="Assets\TMS\Plugins\Serialization\Json\JsonData.cs" />
+    <Compile Include="Assets\TMS\Plugins\Serialization\Json\JsonDataContractAttribute.cs" />
+    <Compile Include="Assets\TMS\Plugins\Serialization\Json\JsonDataMember.cs" />
+    <Compile Include="Assets\TMS\Plugins\Serialization\Json\JsonException.cs" />
+    <Compile Include="Assets\TMS\Plugins\Serialization\Json\JsonMapper.cs" />
+    <Compile Include="Assets\TMS\Plugins\Serialization\Json\JsonReader.cs" />
+    <Compile Include="Assets\TMS\Plugins\Serialization\Json\JsonToken.cs" />
+    <Compile Include="Assets\TMS\Plugins\Serialization\Json\JsonType.cs" />
+    <Compile Include="Assets\TMS\Plugins\Serialization\Json\JsonWriter.cs" />
+    <Compile Include="Assets\TMS\Plugins\Serialization\Json\Lexer.cs" />
+    <Compile Include="Assets\TMS\Plugins\Serialization\Json\ObjectMetadata.cs" />
+    <Compile Include="Assets\TMS\Plugins\Serialization\Json\OrderedDictionaryEnumerator.cs" />
+    <Compile Include="Assets\TMS\Plugins\Serialization\Json\ParserToken.cs" />
+    <Compile Include="Assets\TMS\Plugins\Serialization\Json\PropertyMetadata.cs" />
+    <Compile Include="Assets\TMS\Plugins\Serialization\Json\WriterContext.cs" />
+    <Compile Include="Assets\TMS\Plugins\Serialization\ObjectSerializer.cs" />
+    <Compile Include="Assets\TMS\Plugins\Tasks\Delay\TaskDelayItem.cs" />
+    <Compile Include="Assets\TMS\Plugins\Tasks\Delay\TaskDelayManager.cs" />
+    <Compile Include="Assets\TMS\Plugins\Tasks\Threading\ActionThread.cs" />
+    <Compile Include="Assets\TMS\Plugins\Tasks\Threading\Channel.cs" />
+    <Compile Include="Assets\TMS\Plugins\Tasks\Threading\CustomTask.cs" />
+    <Compile Include="Assets\TMS\Plugins\Tasks\Threading\CustomTaskDispatcher.cs" />
+    <Compile Include="Assets\TMS\Plugins\Tasks\Threading\CustomTaskDispatcherBase.cs" />
+    <Compile Include="Assets\TMS\Plugins\Tasks\Threading\CustomTaskT.cs" />
+    <Compile Include="Assets\TMS\Plugins\Tasks\Threading\CustomThread.cs" />
+    <Compile Include="Assets\TMS\Plugins\Tasks\Threading\EnumeratableActionThread.cs" />
+    <Compile Include="Assets\TMS\Plugins\Tasks\Threading\NullDispatcher.cs" />
+    <Compile Include="Assets\TMS\Plugins\Tasks\Threading\SwitchTo.cs" />
+    <Compile Include="Assets\TMS\Plugins\Tasks\Threading\TaskDistributer.cs" />
+    <Compile Include="Assets\TMS\Plugins\Tasks\Threading\TaskEndedEventHandler.cs" />
+    <Compile Include="Assets\TMS\Plugins\Tasks\Threading\TaskSortingSystem.cs" />
+    <Compile Include="Assets\TMS\Plugins\Tasks\Threading\TaskWorker.cs" />
+    <Compile Include="Assets\TMS\Plugins\Tasks\Threading\ThreadHelper.cs" />
+    <Compile Include="Assets\TMS\Plugins\Tasks\Threading\TickThread.cs" />
+    <Compile Include="Assets\TMS\Plugins\Tasks\Timeout\ITimeoutDelegateManager.cs" />
+    <Compile Include="Assets\TMS\Plugins\Tasks\Timeout\TimeoutDelegateCancelPayload.cs" />
+    <Compile Include="Assets\TMS\Plugins\Tasks\Timeout\TimeoutDelegateManager.cs" />
+    <Compile Include="Assets\TMS\Plugins\Tasks\Timeout\TimeoutDelegatePayload.cs" />
+    <Compile Include="Assets\TMS\Plugins\Tasks\Timeout\UnityTimer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\DualCorStudios\Readme.txt" />
+    <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
+    <None Include="Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />
+    <None Include="Assets\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
+    <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="GenerateTargetFrameworkMonikerAttribute" />
+</Project>
