@@ -18,5 +18,11 @@ public class LevelTemplate : ScriptableObject
 	public GameObject[] StartPrefabs;
 
 	[SerializeField]
+	public GameObject[] StarPrefabs;
+
+	[SerializeField]
+	public GameObject[] CoinPrefabs;
+
+	[SerializeField]
 	public Vector3 PrefabPosition;	
 }

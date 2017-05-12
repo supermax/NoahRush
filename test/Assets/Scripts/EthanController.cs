@@ -28,4 +28,10 @@ public class EthanController : MonoBehaviourBase
 		_controller.transform.position = _initControllerPosition;
 		_controller.transform.rotation = _initControllerRotation;
 	}
+
+	void OnTriggerEnter(Collider other)
+	{
+		print(other.gameObject.name);
+	}
+
 }

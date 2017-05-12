@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>5.4.3f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -75,8 +77,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\CollisionHandler.cs" />
     <Compile Include="Assets\Scripts\DevObject.cs" />
     <Compile Include="Assets\Scripts\EthanController.cs" />
+    <Compile Include="Assets\Scripts\GameObjectAction.cs" />
+    <Compile Include="Assets\Scripts\GameObjectActionType.cs" />
+    <Compile Include="Assets\Scripts\GameObjectTags.cs" />
     <Compile Include="Assets\Scripts\LevelRandomizer.cs" />
     <Compile Include="Assets\Scripts\LevelTemplate.cs" />
     <Compile Include="Assets\Scripts\MainMenuManager.cs" />

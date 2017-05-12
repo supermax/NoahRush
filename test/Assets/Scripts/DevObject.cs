@@ -1,20 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DevObject : MonoBehaviour
+public class DevObject : GameObjectAction
 {
-	public bool IsActiveOnRun;
-
-	public bool DestroyOnRun;
-
-	void Awake()
+	protected override void Awake()
 	{
-		if (DestroyOnRun)
-		{
-			DestroyImmediate(gameObject);
-			return;
-		}
+		base.Awake();
 
-		gameObject.SetActive(IsActiveOnRun);
+		DoAction(Action);
 	}
 }
