@@ -3,28 +3,37 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMS.Common.Core;
 using TMS.Common.Extensions;
 using Object = UnityEngine.Object;
 
-public class LevelRandomizer : TMS.Common.Core.MonoBehaviourBase
+public class LevelBuilder : MonoBehaviourBase
 {
 	[SerializeField] public LevelTemplate Prefabs;
 
-	private LevelTemplate _cache;
+	public LevelTemplate LevelPool { get; private set; }
 
-	protected override void Start()
+	public void Init()
 	{
-		base.Start();
-
-		_cache = Clone(Prefabs, gameObject.transform);
-		BuildLevel(_cache);
+		InitPool();
+		BuildLevel();
 	}
 
-	private void BuildLevel(LevelTemplate template)
+	public void InitPool()
+	{
+		LevelPool = Clone(Prefabs, gameObject.transform);
+	}
+
+	public void BuildLevel()
+	{
+		BuildLevel(LevelPool, gameObject.transform.position);
+	}
+
+	private static void BuildLevel(LevelTemplate template, Vector3 initPos)
 	{
 		var startPrefabs = template.StartPrefabs.RandomShuffle();
 		var gapPrefabs = template.GapPrefabs.RandomShuffle();
-		var trapPrefabs = _cache.TrapPrefabs.RandomShuffle();
+		var trapPrefabs = template.TrapPrefabs.RandomShuffle();
 
 		var gapIdx = 0;
 		var defIdx = 0;
@@ -33,15 +42,16 @@ public class LevelRandomizer : TMS.Common.Core.MonoBehaviourBase
 		{
 			levelPrefabs.Add(prefab);
 
-			if (defIdx < _cache.DefaultPrefabs.Length)
+			if (defIdx < template.DefaultPrefabs.Length)
 			{
-				var defPrefab = _cache.DefaultPrefabs[defIdx++];
-				levelPrefabs.Add(defPrefab);
+				levelPrefabs.Add(template.DefaultPrefabs[defIdx++]);
 			}
 
 			if(gapIdx >= gapPrefabs.GetLength()) continue;
-			var gapPrefab = gapPrefabs.ElementAt(gapIdx++);
-			levelPrefabs.Add(gapPrefab);
+			levelPrefabs.Add(gapPrefabs.ElementAt(gapIdx++));
+
+			if (defIdx >= template.DefaultPrefabs.Length) continue;
+			levelPrefabs.Add(template.DefaultPrefabs[defIdx++]);
 		}
 
 		if (gapIdx < gapPrefabs.GetLength() - 1)
@@ -52,7 +62,16 @@ public class LevelRandomizer : TMS.Common.Core.MonoBehaviourBase
 			}
 		}
 
-		Arrange(levelPrefabs, gameObject.transform.position, _cache.PrefabPosition);
+		if (defIdx < template.DefaultPrefabs.Length - 1)
+		{
+			for (; defIdx < template.DefaultPrefabs.Length; defIdx++)
+			{
+				levelPrefabs.Add(template.DefaultPrefabs[defIdx]);
+			}
+		}
+
+		template.LevelGameObjects = levelPrefabs.ToArray();
+		template.LevelLength = Arrange(levelPrefabs, initPos, template.PrefabPosition);
 	}
 
 	private static LevelTemplate Clone(LevelTemplate source, Transform parentTransform)
@@ -92,7 +111,7 @@ public class LevelRandomizer : TMS.Common.Core.MonoBehaviourBase
 		return clonedPrefabs;
 	}
 
-	private static void Arrange(IEnumerable<GameObject> prefabs, 
+	private static Vector3 Arrange(IEnumerable<GameObject> prefabs, 
 		Vector3 initPos, Vector3 prefabPosition)
 	{
 		var prevPrefabPos = initPos;
@@ -104,5 +123,7 @@ public class LevelRandomizer : TMS.Common.Core.MonoBehaviourBase
 
 			prevPrefabPos += prefabPosition;
 		}
+
+		return prevPrefabPos;
 	}
 }

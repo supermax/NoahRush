@@ -3,3 +3,4 @@ test/Library/
 src/Library/
 *.userprefs
 test/Builds/
+*.csproj

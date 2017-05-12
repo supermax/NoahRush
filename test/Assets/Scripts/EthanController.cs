@@ -1,17 +1,31 @@
-﻿using UnityEngine;
+﻿#region Usings
+
 using System.Collections;
 using TMS.Common.Core;
+using UnityEngine;
 using UnityStandardAssets.Characters.ThirdPerson;
 using UnityStandardAssets.CrossPlatformInput;
 
+#endregion
+
 [RequireComponent(typeof(ThirdPersonCharacter), typeof(ThirdPersonUserControl))]
-public class EthanController : MonoBehaviourBase
+public class EthanController : ViewModel
 {
+	private Vector3 _camForward;
 	private ThirdPersonCharacter _character;
-	private ThirdPersonUserControl _userControl;
+
+	private bool _crouch;
 
 	private Vector3 _initControllerPosition;
 	private Quaternion _initControllerRotation;
+	private bool _isJumping;
+	private Transform _mainCameraTransform;
+
+	private float _moveSideSpeed;
+	private Vector3 _moveVector;
+	private ThirdPersonUserControl _userControl; // TODO
+
+	public float MoveForwardSpeed = 1f;
 
 	protected override void Start()
 	{
@@ -29,6 +43,8 @@ public class EthanController : MonoBehaviourBase
 			return;
 		}
 		_mainCameraTransform = Camera.main.transform;
+
+		_playerMovePayload = new PlayerMovePayload {PlayerController = this};
 	}
 
 	public void GotoStart()
@@ -37,37 +53,24 @@ public class EthanController : MonoBehaviourBase
 		_character.transform.rotation = _initControllerRotation;
 	}
 
-	void OnTriggerEnter(Collider other)
+	private void OnTriggerEnter(Collider other)
 	{
 		// TODO
 		print(other.gameObject.name);
 	}
 
-	private Vector3 _camForward;    
-	private Vector3 _moveVector;
-	private Transform _mainCameraTransform;
-	private bool _isJumping;
-
-	public float MoveForwardSpeed = 1f;
-
-	private float _moveSideSpeed = 0f;
-
 	private void Update()
 	{
 		if (!_isJumping)
-		{
 			_isJumping = CrossPlatformInputManager.GetButtonDown("Jump");
-		}
 	}
-
-	private bool _crouch;
 
 	// Fixed update is called in sync with physics
 	private void FixedUpdate()
 	{
 		// read inputs
-		float h = _moveSideSpeed + CrossPlatformInputManager.GetAxis("Horizontal");
-		float v = MoveForwardSpeed; //CrossPlatformInputManager.GetAxis("Vertical");
+		var h = _moveSideSpeed + CrossPlatformInputManager.GetAxis("Horizontal");
+		var v = MoveForwardSpeed; //CrossPlatformInputManager.GetAxis("Vertical");
 		//print("Vertical: " + v);
 
 		if (Input.GetKey(KeyCode.C))
@@ -86,7 +89,7 @@ public class EthanController : MonoBehaviourBase
 			_moveVector = v * Vector3.forward + h * Vector3.right;
 		}
 #if !MOBILE_INPUT
-		// walk speed multiplier
+// walk speed multiplier
 		if (Input.GetKey(KeyCode.LeftShift)) _moveVector *= 0.5f;
 #endif
 
@@ -94,7 +97,11 @@ public class EthanController : MonoBehaviourBase
 		_character.Move(_moveVector, _crouch, _isJumping);
 
 		_isJumping = false;
+
+		Publish(_playerMovePayload);
 	}
+
+	private PlayerMovePayload _playerMovePayload;
 
 	public void OnLeft()
 	{
@@ -135,7 +142,7 @@ public class EthanController : MonoBehaviourBase
 	{
 		yield return new WaitForSeconds(0.2f);
 
-		if(_moveSideSpeed < 0)
+		if (_moveSideSpeed < 0)
 			_moveSideSpeed = 1f;
 		else
 			_moveSideSpeed = -1f;

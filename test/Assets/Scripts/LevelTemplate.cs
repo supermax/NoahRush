@@ -6,7 +6,7 @@ public class LevelTemplate : ScriptableObject
 	[SerializeField]
 	public GameObject DefaultPrefab;
 
-	internal GameObject[] DefaultPrefabs;
+	public GameObject[] DefaultPrefabs { get; set; }
 
 	[SerializeField]
 	public GameObject[] TrapPrefabs;
@@ -24,5 +24,9 @@ public class LevelTemplate : ScriptableObject
 	public GameObject[] CoinPrefabs;
 
 	[SerializeField]
-	public Vector3 PrefabPosition;	
+	public Vector3 PrefabPosition;
+
+	public GameObject[] LevelGameObjects { get; set; }
+
+	public Vector3 LevelLength { get; set; }
 }
