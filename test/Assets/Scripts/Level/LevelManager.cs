@@ -1,9 +1,14 @@
-﻿using TMS.Common.Core;
+﻿#region Usings
+
+using TMS.Common.Core;
 using TMS.Common.Extensions;
 using UnityEngine;
 
+#endregion
+
 public class LevelManager : ViewModel
 {
+	private LevelBuilder _activeLevelBuilder;
 	[SerializeField] public uint PoolSize = 2;
 
 	[SerializeField] public LevelTemplate Template;
@@ -14,26 +19,120 @@ public class LevelManager : ViewModel
 	{
 		base.Awake();
 
-		if (PoolSize < 1) PoolSize = 1;
+		if (PoolSize < 2) PoolSize = 2;
 		LevelBuilders = new LevelBuilder[PoolSize];
 
-		Subscribe<PlayerMovePayload>(OnPlayerMove);
+		InitLevelBuilders();
 	}
 
 	private void OnPlayerMove(PlayerMovePayload payload)
 	{
-		
+		//if (_activeLevelBuilder == null)
+		//{
+		//	Debug.LogError("Cannot get active Level Builder!");
+		//	return;
+		//}
+
+		//var playerPos = payload.PlayerController.transform.position.z;
+		//var levelLength = _activeLevelBuilder.LevelPool.LevelLength.z / 2f;
+		//if (playerPos < levelLength) return;
+
+		//RebuildLevel(_activeLevelBuilder);
+	}
+
+	private void RebuildLevel()
+	{
+		if (_activeLevelBuilder == null)
+		{
+			Debug.LogError("Cannot get active Level Builder!");
+			return;
+		}
+
+		if (LevelBuilders.IsNullOrEmpty())
+		{
+			Debug.LogError("Level Builders are NULL\\Empty!");
+			return;
+		}
+
+		if (LevelBuilders.Length < 2)
+		{
+			Debug.LogError("Level Builders must contain at least 2 items!");
+			return;
+		}
+
+		var idx = LevelBuilders.GetIndexOf(_activeLevelBuilder);
+		var nextIdx = idx == LevelBuilders.Length - 1 ? 0 : idx + 1;
+
+		var nextBuilder = LevelBuilders[nextIdx];
+		nextBuilder.gameObject.transform.position = _activeLevelBuilder.LevelPool.LevelLength / 2;
+		nextBuilder.gameObject.SetActive(true);
+		nextBuilder.BuildLevel(true);
 	}
 
 	protected override void Start()
 	{
 		base.Start();
 
+		Subscribe<PlayerMovePayload>(OnPlayerMove);
+		Subscribe<UIActionPayload>(OnUIAction);
+		Subscribe<PlayerTriggerPayload>(OnPlayerTrigger);
+	}
+
+	private void OnPlayerTrigger(PlayerTriggerPayload payload)
+	{
+		switch (payload.TriggerSource.tag)
+		{
+			case GameObjectTagNames.DefaultTrack:
+				var activeBuilder = payload.TriggerSource.GetComponentInParent<LevelBuilder>();
+				payload.TriggerSource = null;
+
+				if (activeBuilder == null || Equals(_activeLevelBuilder, activeBuilder)) return;
+
+				_activeLevelBuilder = activeBuilder;
+				print("Active Level: " + _activeLevelBuilder.name);
+
+				RebuildLevel();
+				break;
+		}
+	}
+
+	private void OnUIAction(UIActionPayload payload)
+	{
+		switch (payload.Action)
+		{
+			case UIActionType.StartGame:
+			case UIActionType.RestartGame:
+				ResetLevel();
+				break;
+
+			case UIActionType.PauseGame:
+				break;
+
+			case UIActionType.ResumeGame:
+				break;
+
+			case UIActionType.QuitGame:
+				break;
+
+			case UIActionType.ShowSettings:
+				break;
+		}
+	}
+
+	private void ResetLevel()
+	{
+		// TODO
+	}
+
+	private void InitLevelBuilders()
+	{
 		if (LevelBuilders.IsNullOrEmpty())
 		{
-			Debug.LogError("Level Builders are NULL\\Empty");
+			Debug.LogError("Level Builders are NULL\\Empty!");
 			return;
 		}
+
+		Subscribe<ScriptStateChangePayload<LevelBuilder>>(OnLevelBuilderStateChange);
 
 		LevelBuilder prevBuilder = null;
 
@@ -46,15 +145,32 @@ public class LevelManager : ViewModel
 			{
 				go.SetActive(false);
 				go.transform.position = prevBuilder.LevelPool.LevelLength / 2;
-				//go.transform.localPosition = prevBuilder.LevelPool.LevelLength;
 			}
 
 			var builder = go.AddComponent<LevelBuilder>();
 			builder.Prefabs = Template;
-			builder.Init();
+			builder.InitPool();
+
+			if (prevBuilder == null)
+			{
+				_activeLevelBuilder = builder;
+				_activeLevelBuilder.BuildLevel();
+			}
 
 			LevelBuilders[i] = builder;
 			prevBuilder = builder;
 		}
+
+		RebuildLevel();
+	}
+
+	private void OnLevelBuilderStateChange(ScriptStateChangePayload<LevelBuilder> payload)
+	{
+		//TODO
+
+		//if (payload.State != ScriptStateType.Enabled) return;
+
+		//_activeLevelBuilder = payload.Source;
+		//Log("Active Level Builder: {0}", _activeLevelBuilder);
 	}
 }

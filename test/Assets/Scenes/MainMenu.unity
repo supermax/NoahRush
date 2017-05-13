@@ -119,8 +119,9 @@ Transform:
   m_Children:
   - {fileID: 1603000415}
   - {fileID: 843483112}
+  - {fileID: 1405825935}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!114 &128884919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,6 +138,8 @@ MonoBehaviour:
   StartNewGameButton: {fileID: 825142685}
   ResumeGameButton: {fileID: 938956523}
   SettingsButton: {fileID: 354885354}
+  QuitButton: {fileID: 1974832797}
+  EventSystemHolder: {fileID: 1405825931}
 --- !u!1 &154552227
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,6 +220,7 @@ GameObject:
   - 222: {fileID: 354885353}
   - 114: {fileID: 354885352}
   - 114: {fileID: 354885351}
+  - 114: {fileID: 354885355}
   m_Layer: 5
   m_Name: SettingsButton
   m_TagString: Untagged
@@ -338,9 +342,33 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 354885352}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 354885355}
+        m_MethodName: DoAction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &354885355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 354885349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39bf728d6a5e0594aa5cd199616dbf1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LogSeverity: 0
+  Action: 5
 --- !u!1 &376635958
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,6 +535,23 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 475440965}
+--- !u!1 &522904304 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 117722, guid: dca0aad03263d574aa1f29c855777b46, type: 2}
+  m_PrefabInternal: {fileID: 535159109}
+--- !u!114 &522904305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 522904304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39bf728d6a5e0594aa5cd199616dbf1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LogSeverity: 0
+  Action: 0
 --- !u!1001 &535159109
 Prefab:
   m_ObjectHideFlags: 0
@@ -556,7 +601,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22459314, guid: dca0aad03263d574aa1f29c855777b46, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -147.91241
+      value: -147.16937
       objectReference: {fileID: 0}
     - target: {fileID: 22459314, guid: dca0aad03263d574aa1f29c855777b46, type: 2}
       propertyPath: m_SizeDelta.x
@@ -564,7 +609,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22459314, guid: dca0aad03263d574aa1f29c855777b46, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 295.82483
+      value: 294.33875
       objectReference: {fileID: 0}
     - target: {fileID: 22459314, guid: dca0aad03263d574aa1f29c855777b46, type: 2}
       propertyPath: m_AnchorMin.x
@@ -625,10 +670,10 @@ Prefab:
     - target: {fileID: 11437168, guid: dca0aad03263d574aa1f29c855777b46, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 128884919}
+      objectReference: {fileID: 522904305}
     - target: {fileID: 11437168, guid: dca0aad03263d574aa1f29c855777b46, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartNewGame
+      value: DoAction
       objectReference: {fileID: 0}
     - target: {fileID: 11437168, guid: dca0aad03263d574aa1f29c855777b46, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -924,6 +969,7 @@ GameObject:
   - 222: {fileID: 938956522}
   - 114: {fileID: 938956521}
   - 114: {fileID: 938956520}
+  - 114: {fileID: 938956524}
   m_Layer: 5
   m_Name: ResumeGameButton
   m_TagString: Untagged
@@ -1045,9 +1091,33 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 938956521}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 938956524}
+        m_MethodName: DoAction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &938956524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 938956518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39bf728d6a5e0594aa5cd199616dbf1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LogSeverity: 0
+  Action: 3
 --- !u!1 &1123144130
 GameObject:
   m_ObjectHideFlags: 0
@@ -1181,8 +1251,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_Father: {fileID: 128884918}
+  m_RootOrder: 2
 --- !u!1 &1582663213
 GameObject:
   m_ObjectHideFlags: 0
@@ -1287,7 +1357,7 @@ GameObject:
   - 20: {fileID: 1603000414}
   m_Layer: 0
   m_Name: Main Camera
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1654,6 +1724,7 @@ GameObject:
   - 222: {fileID: 1974832796}
   - 114: {fileID: 1974832795}
   - 114: {fileID: 1974832794}
+  - 114: {fileID: 1974832798}
   m_Layer: 5
   m_Name: QuitButton
   m_TagString: Untagged
@@ -1775,6 +1846,30 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1974832795}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1974832798}
+        m_MethodName: DoAction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &1974832798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1974832792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39bf728d6a5e0594aa5cd199616dbf1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LogSeverity: 0
+  Action: 4

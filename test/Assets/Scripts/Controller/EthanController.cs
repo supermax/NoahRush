@@ -25,6 +25,7 @@ public class EthanController : ViewModel
 	private Vector3 _moveVector;
 
 	private PlayerMovePayload _playerMovePayload;
+	private PlayerTriggerPayload _playerTriggerPayload;
 
 	public bool JumpOnTurn = true;
 
@@ -34,9 +35,12 @@ public class EthanController : ViewModel
 
 	public float TurnSpeed = 1f;
 
-	protected override void Start()
+	protected override void Awake()
 	{
-		base.Start();
+		_playerMovePayload = new PlayerMovePayload { PlayerController = this };
+		_playerTriggerPayload = new PlayerTriggerPayload { PlayerController = this };
+
+		base.Awake();
 
 		_character = GetComponent<ThirdPersonCharacter>();
 		_initControllerPosition = _character.transform.position;
@@ -44,16 +48,48 @@ public class EthanController : ViewModel
 
 		if (Camera.main == null)
 		{
-			Debug.LogWarning("Main camera is required for better speed formula");
+			Debug.LogError("Main camera is required for the game!");
 			return;
 		}
 		_mainCameraTransform = Camera.main.transform;
 		_mainCameraInitPos = _mainCameraTransform.position;
 
-		_playerMovePayload = new PlayerMovePayload {PlayerController = this};
-
 		iTween.Init(_mainCameraTransform.gameObject);
 		iTween.Init(_character.gameObject);
+	}
+
+	protected override void Start()
+	{
+		base.Start();
+
+		Subscribe<UIActionPayload>(OnUIAction);
+	}
+
+	private void OnUIAction(UIActionPayload payload)
+	{
+		switch (payload.Action)
+		{
+			case UIActionType.StartGame:
+			case UIActionType.RestartGame:
+				GotoStart();
+				break;
+
+			case UIActionType.PauseGame:
+				enabled = false;
+				Time.timeScale = 0f;
+				break;
+
+			case UIActionType.ResumeGame:
+				enabled = true;
+				Time.timeScale = 1f;
+				break;
+
+			case UIActionType.QuitGame:
+				break;
+
+			case UIActionType.ShowSettings:
+				break;
+		}
 	}
 
 	public void GotoStart()
@@ -64,8 +100,9 @@ public class EthanController : ViewModel
 
 	private void OnTriggerEnter(Collider other)
 	{
-		// TODO
-		print(other.gameObject.name);
+		_playerTriggerPayload.TriggerSource = other;
+
+		Publish(_playerTriggerPayload);
 	}
 
 	// Fixed update is called in sync with physics

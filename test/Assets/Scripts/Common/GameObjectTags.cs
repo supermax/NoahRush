@@ -1,4 +1,4 @@
-﻿public static class GameObjectTags
+﻿public static class GameObjectTagNames
 {
 	public const string Gem = "Gem";
 

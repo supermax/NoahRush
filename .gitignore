@@ -4,3 +4,4 @@ src/Library/
 *.userprefs
 test/Builds/
 *.csproj
+test/Exports/
