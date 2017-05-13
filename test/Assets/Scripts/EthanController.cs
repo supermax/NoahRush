@@ -1,5 +1,6 @@
 ﻿#region Usings
 
+using System;
 using System.Collections;
 using TMS.Common.Core;
 using UnityEngine;
@@ -8,7 +9,7 @@ using UnityStandardAssets.CrossPlatformInput;
 
 #endregion
 
-[RequireComponent(typeof(ThirdPersonCharacter), typeof(ThirdPersonUserControl))]
+[RequireComponent(typeof(ThirdPersonCharacter))]
 public class EthanController : ViewModel
 {
 	private Vector3 _camForward;
@@ -19,11 +20,13 @@ public class EthanController : ViewModel
 	private Vector3 _initControllerPosition;
 	private Quaternion _initControllerRotation;
 	private bool _isJumping;
+	private Vector3 _mainCameraInitPos;
+
 	private Transform _mainCameraTransform;
 
-	private float _moveSideSpeed;
 	private Vector3 _moveVector;
-	private ThirdPersonUserControl _userControl; // TODO
+
+	private PlayerMovePayload _playerMovePayload;
 
 	public float MoveForwardSpeed = 1f;
 
@@ -35,16 +38,18 @@ public class EthanController : ViewModel
 		_initControllerPosition = _character.transform.position;
 		_initControllerRotation = _character.transform.rotation;
 
-		_userControl = GetComponent<ThirdPersonUserControl>();
-
 		if (Camera.main == null)
 		{
 			Debug.LogWarning("Main camera is required for better speed formula");
 			return;
 		}
 		_mainCameraTransform = Camera.main.transform;
+		_mainCameraInitPos = _mainCameraTransform.position;
 
 		_playerMovePayload = new PlayerMovePayload {PlayerController = this};
+
+		iTween.Init(_mainCameraTransform.gameObject);
+		iTween.Init(_character.gameObject);
 	}
 
 	public void GotoStart()
@@ -69,54 +74,54 @@ public class EthanController : ViewModel
 	private void FixedUpdate()
 	{
 		// read inputs
-		var h = _moveSideSpeed + CrossPlatformInputManager.GetAxis("Horizontal");
-		var v = MoveForwardSpeed; //CrossPlatformInputManager.GetAxis("Vertical");
-		//print("Vertical: " + v);
-
-		if (Input.GetKey(KeyCode.C))
-			_crouch = true;
-
-		// calculate move direction to pass to character
-		if (_mainCameraTransform != null)
-		{
-			// calculate camera relative direction to move:
-			_camForward = Vector3.Scale(_mainCameraTransform.forward, new Vector3(1, 0, 1)).normalized;
-			_moveVector = v * _camForward + h * _mainCameraTransform.right;
-		}
-		else
-		{
-			// we use world-relative directions in the case of no main camera
-			_moveVector = v * Vector3.forward + h * Vector3.right;
-		}
-#if !MOBILE_INPUT
-// walk speed multiplier
-		if (Input.GetKey(KeyCode.LeftShift)) _moveVector *= 0.5f;
-#endif
+		var v = MoveForwardSpeed;
+		_moveVector = v * Vector3.forward;
 
 		// pass all parameters to the character control script
 		_character.Move(_moveVector, _crouch, _isJumping);
 
 		_isJumping = false;
 
+		MoveCameraAfterPlayer();
+
 		Publish(_playerMovePayload);
 	}
 
-	private PlayerMovePayload _playerMovePayload;
+	private void MoveCameraAfterPlayer()
+	{
+		var x = _character.gameObject.transform.position.x;
+		var y = _mainCameraTransform.position.y;
+		var z = _character.gameObject.transform.position.z + _mainCameraInitPos.z / 2;
+
+		iTween.MoveUpdate(_mainCameraTransform.gameObject, new Vector3(x / 2, y, z), 0.5f);
+	}
+
+	public bool JumpOnTurn = true;
+
+	public float TurnSpeed = 1f;
+
+	public float MaxTurnRange = 2f;
 
 	public void OnLeft()
 	{
-		_moveSideSpeed = -1f;
-		_isJumping = true;
+		if(_character.transform.position.x <= -MaxTurnRange)
+		{
+			iTween.ShakePosition(_mainCameraTransform.gameObject, new Vector3(-0.1f, 0f, 0f), 0.5f);
+			return;
+		}
 
-		StartCoroutine(RotateToCenter());
+		StartCoroutine(TurnPlayer(-TurnSpeed));
 	}
 
 	public void OnRight()
 	{
-		_moveSideSpeed = 1f;
-		_isJumping = true;
+		if (_character.transform.position.x >= MaxTurnRange)
+		{
+			iTween.ShakePosition(_mainCameraTransform.gameObject, new Vector3(0.1f, 0f, 0f), 0.5f);
+			return;
+		}
 
-		StartCoroutine(RotateToCenter());
+		StartCoroutine(TurnPlayer(TurnSpeed));
 	}
 
 	public void OnUp()
@@ -133,22 +138,40 @@ public class EthanController : ViewModel
 
 	private IEnumerator GetUp()
 	{
-		yield return new WaitForSeconds(0.2f);
+		yield return null;
 
 		_crouch = false;
 	}
 
-	private IEnumerator RotateToCenter()
+	private IEnumerator TurnPlayer(float turnSpeed)
 	{
-		yield return new WaitForSeconds(0.2f);
+		_isJumping = JumpOnTurn;
 
-		if (_moveSideSpeed < 0)
-			_moveSideSpeed = 1f;
-		else
-			_moveSideSpeed = -1f;
+		yield return null;
 
-		yield return new WaitForEndOfFrame();
+		var multiplier = Math.Abs(_character.transform.position.x) < 0.25f ? 2f : 0f;
 
-		_moveSideSpeed = 0f;
+		var x = turnSpeed * multiplier;
+		var y = _character.transform.position.y;
+		var z = _character.transform.position.z;
+		
+		//iTween.MoveTo(_character.gameObject, new Vector3(x / 2f, y, z), 0.5f);
+
+		_character.transform.position = new Vector3(x, y, z);
 	}
+
+	//private IEnumerator TurnPlayer(float turnSpeed, float multiplier = 2)
+	//{
+	//	_isJumping = JumpOnTurn;
+
+	//	yield return null;
+
+	//	var y = _character.transform.position.y;
+	//	var z = _character.transform.position.z;
+	//	_character.transform.position = new Vector3(turnSpeed, y, z);
+
+	//	yield return null;
+
+	//	_character.transform.position = new Vector3(turnSpeed * multiplier, y, z);
+	//}
 }

@@ -45,7 +45,7 @@ public class LevelManager : ViewModel
 			if (prevBuilder != null)
 			{
 				go.SetActive(false);
-				go.transform.position = prevBuilder.LevelPool.LevelLength;
+				go.transform.position = prevBuilder.LevelPool.LevelLength / 2;
 				//go.transform.localPosition = prevBuilder.LevelPool.LevelLength;
 			}
 
