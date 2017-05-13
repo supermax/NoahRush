@@ -5,14 +5,12 @@ using System.Collections;
 using TMS.Common.Core;
 using UnityEngine;
 using UnityStandardAssets.Characters.ThirdPerson;
-using UnityStandardAssets.CrossPlatformInput;
 
 #endregion
 
 [RequireComponent(typeof(ThirdPersonCharacter))]
 public class EthanController : ViewModel
 {
-	private Vector3 _camForward;
 	private ThirdPersonCharacter _character;
 
 	private bool _crouch;
@@ -28,7 +26,13 @@ public class EthanController : ViewModel
 
 	private PlayerMovePayload _playerMovePayload;
 
+	public bool JumpOnTurn = true;
+
+	public float MaxTurnRange = 2f;
+
 	public float MoveForwardSpeed = 1f;
+
+	public float TurnSpeed = 1f;
 
 	protected override void Start()
 	{
@@ -64,12 +68,6 @@ public class EthanController : ViewModel
 		print(other.gameObject.name);
 	}
 
-	private void Update()
-	{
-		if (!_isJumping)
-			_isJumping = CrossPlatformInputManager.GetButtonDown("Jump");
-	}
-
 	// Fixed update is called in sync with physics
 	private void FixedUpdate()
 	{
@@ -96,15 +94,9 @@ public class EthanController : ViewModel
 		iTween.MoveUpdate(_mainCameraTransform.gameObject, new Vector3(x / 2, y, z), 0.5f);
 	}
 
-	public bool JumpOnTurn = true;
-
-	public float TurnSpeed = 1f;
-
-	public float MaxTurnRange = 2f;
-
 	public void OnLeft()
 	{
-		if(_character.transform.position.x <= -MaxTurnRange)
+		if (_character.transform.position.x <= -MaxTurnRange)
 		{
 			iTween.ShakePosition(_mainCameraTransform.gameObject, new Vector3(-0.1f, 0f, 0f), 0.5f);
 			return;
@@ -154,24 +146,7 @@ public class EthanController : ViewModel
 		var x = turnSpeed * multiplier;
 		var y = _character.transform.position.y;
 		var z = _character.transform.position.z;
-		
-		//iTween.MoveTo(_character.gameObject, new Vector3(x / 2f, y, z), 0.5f);
 
 		_character.transform.position = new Vector3(x, y, z);
 	}
-
-	//private IEnumerator TurnPlayer(float turnSpeed, float multiplier = 2)
-	//{
-	//	_isJumping = JumpOnTurn;
-
-	//	yield return null;
-
-	//	var y = _character.transform.position.y;
-	//	var z = _character.transform.position.z;
-	//	_character.transform.position = new Vector3(turnSpeed, y, z);
-
-	//	yield return null;
-
-	//	_character.transform.position = new Vector3(turnSpeed * multiplier, y, z);
-	//}
 }

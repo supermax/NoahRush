@@ -8,24 +8,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a15562f4da0fe94fa0efb1c56fd8a85, type: 3}
+  m_Script: {fileID: 11500000, guid: 2417150a1ed91ba44b338d6cb1d217af, type: 3}
   m_Name: GapsLevelTemplate
   m_EditorClassIdentifier: 
   DefaultPrefab: {fileID: 1000010616055162, guid: 435eb89f50a88491cb36a0c08a64a64d,
     type: 2}
   TrapPrefabs:
   - {fileID: 1000012809602986, guid: a5ccd7af45879431092b69958db6695d, type: 2}
-  - {fileID: 1000010616055162, guid: 435eb89f50a88491cb36a0c08a64a64d, type: 2}
   - {fileID: 1000010107953454, guid: 2893ff2d3217e40b4bfbeebd8232c970, type: 2}
-  - {fileID: 1000010616055162, guid: 435eb89f50a88491cb36a0c08a64a64d, type: 2}
   - {fileID: 1000013755628198, guid: 467502021888042bfb77948a39d73af3, type: 2}
-  GapPrefabs:
-  - {fileID: 1000010616055162, guid: 435eb89f50a88491cb36a0c08a64a64d, type: 2}
   - {fileID: 1000011257316638, guid: 29a8b5f8c244846d3bf3997f9777fa83, type: 2}
-  - {fileID: 1000010616055162, guid: 435eb89f50a88491cb36a0c08a64a64d, type: 2}
   - {fileID: 1000012572879072, guid: f270c89f6bbe34326b5ba15d45af56ce, type: 2}
-  - {fileID: 1000010616055162, guid: 435eb89f50a88491cb36a0c08a64a64d, type: 2}
+  GapPrefabs:
+  - {fileID: 1000012809602986, guid: a5ccd7af45879431092b69958db6695d, type: 2}
+  - {fileID: 1000010107953454, guid: 2893ff2d3217e40b4bfbeebd8232c970, type: 2}
+  - {fileID: 1000013755628198, guid: 467502021888042bfb77948a39d73af3, type: 2}
+  - {fileID: 1000011257316638, guid: 29a8b5f8c244846d3bf3997f9777fa83, type: 2}
+  - {fileID: 1000012572879072, guid: f270c89f6bbe34326b5ba15d45af56ce, type: 2}
   StartPrefabs:
+  - {fileID: 1000010616055162, guid: 435eb89f50a88491cb36a0c08a64a64d, type: 2}
+  - {fileID: 1000010616055162, guid: 435eb89f50a88491cb36a0c08a64a64d, type: 2}
   - {fileID: 1000010616055162, guid: 435eb89f50a88491cb36a0c08a64a64d, type: 2}
   - {fileID: 1000010616055162, guid: 435eb89f50a88491cb36a0c08a64a64d, type: 2}
   - {fileID: 1000010616055162, guid: 435eb89f50a88491cb36a0c08a64a64d, type: 2}
