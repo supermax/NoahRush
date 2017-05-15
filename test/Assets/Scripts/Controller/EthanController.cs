@@ -29,32 +29,32 @@ public class EthanController : ViewModel
 
 	public bool JumpOnTurn = true;
 
+	public bool CanRun;
+
+	public float StartRunTime = 1.5f;
+
 	public float MaxTurnRange = 2f;
 
 	public float MoveForwardSpeed = 1f;
 
 	public float TurnSpeed = 1f;
 
-	public float CameraMovementSmoothing = 5f;
+	public float CamMoveSpeed = 5f;
 
 	protected override void Awake()
 	{
-		_playerMovePayload = new PlayerMovePayload { PlayerController = this };
-		_playerTriggerPayload = new PlayerTriggerPayload { PlayerController = this };
-
 		base.Awake();
 
+		_playerMovePayload = new PlayerMovePayload { PlayerController = this };
+		_playerTriggerPayload = new PlayerTriggerPayload { PlayerController = this };
 		_character = GetComponent<ThirdPersonCharacter>();
-		_initControllerPosition = _character.transform.position;
-		_initControllerRotation = _character.transform.rotation;
-
+		
 		if (Camera.main == null)
 		{
 			Debug.LogError("Main camera is required for the game!");
 			return;
 		}
 		_mainCameraTransform = Camera.main.transform;
-		_mainCameraPosOffset = _mainCameraTransform.position - transform.position;
 		
 		iTween.Init(_mainCameraTransform.gameObject);
 		iTween.Init(_character.gameObject);
@@ -65,6 +65,19 @@ public class EthanController : ViewModel
 		base.Start();
 
 		Subscribe<UIActionPayload>(OnUIAction);
+		StartCoroutine(InitPlayer());
+	}
+
+	private IEnumerator InitPlayer()
+	{
+		yield return new WaitForSeconds(StartRunTime);
+
+		_initControllerPosition = _character.transform.position;
+		_initControllerRotation = _character.transform.rotation;
+		_mainCameraPosOffset = _mainCameraTransform.position - transform.position;
+
+		CanRun = true;
+		//OnDown();
 	}
 
 	private void OnUIAction(UIActionPayload payload)
@@ -110,6 +123,8 @@ public class EthanController : ViewModel
 	// Fixed update is called in sync with physics
 	private void FixedUpdate()
 	{
+		if(!CanRun) return;
+
 		// read inputs
 		var v = MoveForwardSpeed;
 		_moveVector = v * Vector3.forward;
@@ -133,7 +148,7 @@ public class EthanController : ViewModel
 
 		//iTween.MoveUpdate(_mainCameraTransform.gameObject, new Vector3(x / 2, y, z), 0.5f);
 
-		_mainCameraTransform.position = Vector3.Lerp(_mainCameraTransform.position, targetCamPos, CameraMovementSmoothing * Time.deltaTime);
+		_mainCameraTransform.position = Vector3.Lerp(_mainCameraTransform.position, targetCamPos, CamMoveSpeed * Time.deltaTime);
 	}
 
 	public void OnLeft()
