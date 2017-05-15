@@ -10,11 +10,15 @@ using VacuumShaders.CurvedWorld;
 
 public class LevelManager : ViewModel
 {
-	public float MaxLevelBendSize = 2f;
+	public float LevelBendVerticalMaxSize = 4f;
 
-	public float LevelBendSizeSeed = 0.01f;
+	public float LevelBendHorizontalMaxSize = 4f;
 
-	public float LevelBendMinMovementOffset = 1f;
+	public float LevelBendVerticalSeed = 0.015f;
+
+	public float LevelBendHorizontalSeed = 0.015f;
+
+	public float LevelBendMinPlayerMoveOffset = 1.5f;
 
 	public uint PoolSize = 2;
 
@@ -27,8 +31,14 @@ public class LevelManager : ViewModel
 	private LevelBuilder _activeLevelBuilder;
 
 	private float _prevPlayerPos;
-	private float _levelBendSize;
-	private bool _levelBendDown;
+
+	private float _levelBendVerticalSize;
+
+	private float _levelBendHorizontalSize;
+
+	private float _levelBendVerticalDir = 1f;
+
+	private float _levelBendHorizontalDir = 1f;
 
 	protected override void Awake()
 	{
@@ -59,29 +69,42 @@ public class LevelManager : ViewModel
 		//if (playerPos < levelLength) return;
 		//RebuildLevel(_activeLevelBuilder);
 
-		if (Mathf.Abs(payload.PlayerController.transform.position.z - _prevPlayerPos) < LevelBendMinMovementOffset) return;
+		if (Mathf.Abs(payload.PlayerController.transform.position.z - _prevPlayerPos) < LevelBendMinPlayerMoveOffset) return;
 
-		if (_levelBendDown)
+		if (_levelBendHorizontalDir < 0)
 		{
-			_levelBendSize -= LevelBendSizeSeed;
-
-			if (_levelBendSize <= -MaxLevelBendSize)
+			if (_levelBendHorizontalSize <= LevelBendHorizontalMaxSize * _levelBendHorizontalDir)
 			{
-				_levelBendDown = false;
+				_levelBendHorizontalDir *= -1;
 			}
 		}
 		else
 		{
-			_levelBendSize += LevelBendSizeSeed;
-
-			if (_levelBendSize >= MaxLevelBendSize)
+			if (_levelBendHorizontalSize >= LevelBendHorizontalMaxSize * _levelBendHorizontalDir)
 			{
-				_levelBendDown = true;
+				_levelBendHorizontalDir *= -1;
 			}
 		}
+		_levelBendHorizontalSize += LevelBendHorizontalSeed * _levelBendHorizontalDir;
 
-		_cvController.SetBend(new Vector3(_levelBendSize, 0, 0));
-
+		if (_levelBendVerticalDir < 0)
+		{
+			if (_levelBendVerticalSize <= LevelBendVerticalMaxSize * _levelBendVerticalDir)
+			{
+				_levelBendVerticalDir *= -1;
+			}
+		}
+		else
+		{
+			if (_levelBendVerticalSize >= LevelBendVerticalMaxSize * _levelBendVerticalDir)
+			{
+				_levelBendVerticalDir *= -1;
+			}
+		}
+		_levelBendVerticalSize += LevelBendVerticalSeed * _levelBendVerticalDir;
+		
+		_cvController.SetBend(new Vector3(_levelBendHorizontalSize, _levelBendVerticalSize, 0));
+		
 		_prevPlayerPos = payload.PlayerController.transform.position.z;
 	}
 

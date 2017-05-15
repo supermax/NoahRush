@@ -128,7 +128,7 @@ public class EthanController : ViewModel
 	{
 		var x = _character.gameObject.transform.position.x / 2f;
 		var y = _character.gameObject.transform.position.y / 2f + _mainCameraPosOffset.y;
-		var z = _character.gameObject.transform.position.z + _mainCameraPosOffset.z;
+		var z = _character.gameObject.transform.position.z + _mainCameraPosOffset.z / 2f;
 		var targetCamPos = new Vector3(x, y, z);
 
 		//iTween.MoveUpdate(_mainCameraTransform.gameObject, new Vector3(x / 2, y, z), 0.5f);
