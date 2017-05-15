@@ -130,17 +130,16 @@ public class LevelBuilder : ViewModel
 	private static Vector3 Arrange(IEnumerable<GameObject> prefabs, 
 		Vector3 initPos, Vector3 prefabPosition)
 	{
-		var prevPrefabPos = initPos;
+		var prevPrefabPos = initPos.z;
 
 		foreach (var prefab in prefabs)
 		{
-			prefab.transform.position = prevPrefabPos;
-			prefab.transform.localPosition = prevPrefabPos;
+			prefab.transform.position = new Vector3(0, 0, prevPrefabPos);
 
-			prevPrefabPos += prefabPosition;
+			prevPrefabPos += prefabPosition.z;
 		}
 
-		return prevPrefabPos;
+		return new Vector3(0, 0, prevPrefabPos);
 	}
 
 	protected override void OnEnable()

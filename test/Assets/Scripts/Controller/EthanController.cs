@@ -18,8 +18,8 @@ public class EthanController : ViewModel
 	private Vector3 _initControllerPosition;
 	private Quaternion _initControllerRotation;
 	private bool _isJumping;
-	private Vector3 _mainCameraInitPos;
 
+	private Vector3 _mainCameraPosOffset;
 	private Transform _mainCameraTransform;
 
 	private Vector3 _moveVector;
@@ -34,6 +34,8 @@ public class EthanController : ViewModel
 	public float MoveForwardSpeed = 1f;
 
 	public float TurnSpeed = 1f;
+
+	public float CameraMovementSmoothing = 5f;
 
 	protected override void Awake()
 	{
@@ -52,8 +54,8 @@ public class EthanController : ViewModel
 			return;
 		}
 		_mainCameraTransform = Camera.main.transform;
-		_mainCameraInitPos = _mainCameraTransform.position;
-
+		_mainCameraPosOffset = _mainCameraTransform.position - transform.position;
+		
 		iTween.Init(_mainCameraTransform.gameObject);
 		iTween.Init(_character.gameObject);
 	}
@@ -124,11 +126,14 @@ public class EthanController : ViewModel
 
 	private void MoveCameraAfterPlayer()
 	{
-		var x = _character.gameObject.transform.position.x;
-		var y = _mainCameraTransform.position.y;
-		var z = _character.gameObject.transform.position.z + _mainCameraInitPos.z / 2;
+		var x = _character.gameObject.transform.position.x / 2f;
+		var y = _character.gameObject.transform.position.y / 2f + _mainCameraPosOffset.y;
+		var z = _character.gameObject.transform.position.z + _mainCameraPosOffset.z;
+		var targetCamPos = new Vector3(x, y, z);
 
-		iTween.MoveUpdate(_mainCameraTransform.gameObject, new Vector3(x / 2, y, z), 0.5f);
+		//iTween.MoveUpdate(_mainCameraTransform.gameObject, new Vector3(x / 2, y, z), 0.5f);
+
+		_mainCameraTransform.position = Vector3.Lerp(_mainCameraTransform.position, targetCamPos, CameraMovementSmoothing * Time.deltaTime);
 	}
 
 	public void OnLeft()

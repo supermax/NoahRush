@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: EthanGrey
-  m_Shader: {fileID: 45, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 9aa93289d4310914ab6adfa612cec257, type: 3}
   m_ShaderKeywords: _LIGHTMAPPING_STATIC_LIGHTMAPS _NORMALMAP _UVPRIM_UV1 _UVSEC_UV1
   m_LightmapFlags: 0
   m_CustomRenderQueue: -1
@@ -54,7 +54,7 @@ Material:
     - first:
         name: _MainTex
       second:
-        m_Texture: {fileID: 2800000, guid: 0ca09a4614a0daa44ba043de90181896, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4e2f32e9a1fefc24092337ae061f3dbc, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
@@ -81,7 +81,64 @@ Material:
         m_Texture: {fileID: 2800000, guid: c6093d6055cd6a44ebf0637f17fca0e8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - first:
+        name: _V_CW_Cube
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _V_CW_IBL_Cube
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _V_CW_LightRampTex
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _V_CW_NormalMap
+      second:
+        m_Texture: {fileID: 2800000, guid: 3b5b7be0f2332c24f89a2af018daa62d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _V_CW_SecondaryNormalMap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _V_CW_Specular_Lookup
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
+    - first:
+        name: V_CW_Label_Albedo
+      second: 0
+    - first:
+        name: V_CW_Label_Cutoff
+      second: 0
+    - first:
+        name: V_CW_Label_Modes
+      second: 0
+    - first:
+        name: V_CW_Label_Tag
+      second: 0
+    - first:
+        name: V_CW_Label_UnityDefaults
+      second: 0
+    - first:
+        name: V_CW_Rendering_Mode
+      second: 0
+    - first:
+        name: V_CW_Texture_Mix_Mode
+      second: 0
     - first:
         name: _AlphaTestRef
       second: 0.5
@@ -149,6 +206,39 @@ Material:
         name: _UVSec
       second: 0
     - first:
+        name: _V_CW_Fresnel_Bias
+      second: 0
+    - first:
+        name: _V_CW_IBL_Contrast
+      second: 1
+    - first:
+        name: _V_CW_IBL_Intensity
+      second: 1
+    - first:
+        name: _V_CW_NormalMapStrength
+      second: 1
+    - first:
+        name: _V_CW_NormalMap_UV_Scale
+      second: 1
+    - first:
+        name: _V_CW_ReflectStrengthAlphaOffset
+      second: 0
+    - first:
+        name: _V_CW_Rim_Bias
+      second: 0.2
+    - first:
+        name: _V_CW_Rim_Power
+      second: 3
+    - first:
+        name: _V_CW_SecondaryNormalMap_UV_Scale
+      second: 1
+    - first:
+        name: _V_CW_SpecularOffset
+      second: 0
+    - first:
+        name: _V_CW_Specular_Intensity
+      second: 1
+    - first:
         name: _ZWrite
       second: 1
     m_Colors:
@@ -173,3 +263,12 @@ Material:
     - first:
         name: _SpecularColor
       second: {r: 0.24264705, g: 0.24264705, b: 0.24264705, a: 1}
+    - first:
+        name: _V_CW_MainTex_Scroll
+      second: {r: 0, g: 0, b: 0, a: 0}
+    - first:
+        name: _V_CW_ReflectColor
+      second: {r: 1, g: 1, b: 1, a: 1}
+    - first:
+        name: _V_CW_Rim_Color
+      second: {r: 1, g: 1, b: 1, a: 1}

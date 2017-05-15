@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2417150a1ed91ba44b338d6cb1d217af, type: 3}
+  m_Name: TrapsLevelTemplate
+  m_EditorClassIdentifier: 
+  DefaultPrefab: {fileID: 1000010616055162, guid: 435eb89f50a88491cb36a0c08a64a64d,
+    type: 2}
+  TrapPrefabs:
+  - {fileID: 1000012801850696, guid: 72084bda404384d1b8d7ee4554887253, type: 2}
+  - {fileID: 1000011574715288, guid: 2754042852009419484b4e77f8e5e6a2, type: 2}
+  GapPrefabs:
+  - {fileID: 1000013755628198, guid: 467502021888042bfb77948a39d73af3, type: 2}
+  - {fileID: 1000011257316638, guid: 29a8b5f8c244846d3bf3997f9777fa83, type: 2}
+  - {fileID: 1000012572879072, guid: f270c89f6bbe34326b5ba15d45af56ce, type: 2}
+  StartPrefabs:
+  - {fileID: 1000010616055162, guid: 435eb89f50a88491cb36a0c08a64a64d, type: 2}
+  StarPrefabs:
+  - {fileID: 1000011021476452, guid: a69481af1a4dc4b519646c7f131c363d, type: 2}
+  CoinPrefabs:
+  - {fileID: 1000013765661228, guid: 77eebbb3566784bdebc85a6cdd4e8e33, type: 2}
+  PrefabPosition: {x: 0, y: 0, z: 6}

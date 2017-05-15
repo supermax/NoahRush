@@ -9,9 +9,10 @@ using UnityEngine;
 public class LevelManager : ViewModel
 {
 	private LevelBuilder _activeLevelBuilder;
+
 	[SerializeField] public uint PoolSize = 2;
 
-	[SerializeField] public LevelTemplate Template;
+	[SerializeField] public LevelTemplate[] Templates;
 
 	public LevelBuilder[] LevelBuilders { get; private set; }
 
@@ -19,7 +20,12 @@ public class LevelManager : ViewModel
 	{
 		base.Awake();
 
-		if (PoolSize < 2) PoolSize = 2;
+		if (PoolSize < 2)
+		{
+			PoolSize = 2;
+			Debug.LogError("Pool size MUST be larger then 1!");
+		}
+
 		LevelBuilders = new LevelBuilder[PoolSize];
 
 		InitLevelBuilders();
@@ -64,9 +70,9 @@ public class LevelManager : ViewModel
 		var nextIdx = idx == LevelBuilders.Length - 1 ? 0 : idx + 1;
 
 		var nextBuilder = LevelBuilders[nextIdx];
-		nextBuilder.gameObject.transform.position = _activeLevelBuilder.LevelPool.LevelLength / 2;
+		nextBuilder.gameObject.transform.position = new Vector3(0, 0, _activeLevelBuilder.LevelPool.LevelLength.z);
 		nextBuilder.gameObject.SetActive(true);
-		nextBuilder.BuildLevel(true);
+		nextBuilder.BuildLevel(gameObject.activeInHierarchy);
 	}
 
 	protected override void Start()
@@ -124,6 +130,17 @@ public class LevelManager : ViewModel
 		// TODO
 	}
 
+	private LevelTemplate GetLevelTemplate(ref int index)
+	{
+		if(index < Templates.Length)
+		{
+			return Templates[index++];
+		}
+
+		index = 0;
+		return GetLevelTemplate(ref index);
+	}
+
 	private void InitLevelBuilders()
 	{
 		if (LevelBuilders.IsNullOrEmpty())
@@ -134,6 +151,7 @@ public class LevelManager : ViewModel
 
 		Subscribe<ScriptStateChangePayload<LevelBuilder>>(OnLevelBuilderStateChange);
 
+		var templateIndex = 0;
 		LevelBuilder prevBuilder = null;
 
 		for (var i = 0; i < LevelBuilders.Length; i++)
@@ -144,11 +162,11 @@ public class LevelManager : ViewModel
 			if (prevBuilder != null)
 			{
 				go.SetActive(false);
-				go.transform.position = prevBuilder.LevelPool.LevelLength / 2;
+				go.transform.position = new Vector3(0, 0, prevBuilder.LevelPool.LevelLength.z);
 			}
 
 			var builder = go.AddComponent<LevelBuilder>();
-			builder.Prefabs = Template;
+			builder.Prefabs = GetLevelTemplate(ref templateIndex);
 			builder.InitPool();
 
 			if (prevBuilder == null)
