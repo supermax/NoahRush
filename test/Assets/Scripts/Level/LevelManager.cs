@@ -3,23 +3,39 @@
 using TMS.Common.Core;
 using TMS.Common.Extensions;
 using UnityEngine;
+using UnityEngine.UI;
+using VacuumShaders.CurvedWorld;
 
 #endregion
 
 public class LevelManager : ViewModel
 {
-	private LevelBuilder _activeLevelBuilder;
+	public float MaxLevelBendSize = 2f;
 
-	[SerializeField] public uint PoolSize = 2;
+	public float LevelBendSizeSeed = 0.01f;
 
-	[SerializeField] public LevelTemplate[] Templates;
+	public float LevelBendMinMovementOffset = 1f;
+
+	public uint PoolSize = 2;
+
+	public LevelTemplate[] Templates;
 
 	public LevelBuilder[] LevelBuilders { get; private set; }
+
+	private CurvedWorld_Controller _cvController;
+
+	private LevelBuilder _activeLevelBuilder;
+
+	private float _prevPlayerPos;
+	private float _levelBendSize;
+	private bool _levelBendDown;
 
 	protected override void Awake()
 	{
 		base.Awake();
 
+		_cvController = GetComponent<CurvedWorld_Controller>();
+		
 		if (PoolSize < 2)
 		{
 			PoolSize = 2;
@@ -38,12 +54,35 @@ public class LevelManager : ViewModel
 		//	Debug.LogError("Cannot get active Level Builder!");
 		//	return;
 		//}
-
 		//var playerPos = payload.PlayerController.transform.position.z;
 		//var levelLength = _activeLevelBuilder.LevelPool.LevelLength.z / 2f;
 		//if (playerPos < levelLength) return;
-
 		//RebuildLevel(_activeLevelBuilder);
+
+		if (Mathf.Abs(payload.PlayerController.transform.position.z - _prevPlayerPos) < LevelBendMinMovementOffset) return;
+
+		if (_levelBendDown)
+		{
+			_levelBendSize -= LevelBendSizeSeed;
+
+			if (_levelBendSize <= -MaxLevelBendSize)
+			{
+				_levelBendDown = false;
+			}
+		}
+		else
+		{
+			_levelBendSize += LevelBendSizeSeed;
+
+			if (_levelBendSize >= MaxLevelBendSize)
+			{
+				_levelBendDown = true;
+			}
+		}
+
+		_cvController.SetBend(new Vector3(_levelBendSize, 0, 0));
+
+		_prevPlayerPos = payload.PlayerController.transform.position.z;
 	}
 
 	private void RebuildLevel()
