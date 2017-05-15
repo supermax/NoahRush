@@ -30,6 +30,26 @@ public class SwipeControl : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
 
 	void Update()
 	{
+#if UNITY_EDITOR
+		if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.Q))
+		{
+			SendTouchMessage("OnLeft");
+		}
+		else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.E))
+		{
+			SendTouchMessage("OnRight");
+		}
+
+		if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space))
+		{
+			SendTouchMessage("OnUp");
+		}
+		else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
+		{
+			SendTouchMessage("OnDown");
+		}
+#endif
+
 		if (!_touched) return;
 
 		if (_tap || _drag)
