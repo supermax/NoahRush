@@ -116,7 +116,7 @@ public class EthanController : ViewModel
 	private void OnTriggerEnter(Collider other)
 	{
 		_playerTriggerPayload.TriggerSource = other;
-
+		
 		Publish(_playerTriggerPayload);
 	}
 

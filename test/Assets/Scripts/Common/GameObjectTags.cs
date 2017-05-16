@@ -1,5 +1,7 @@
 ﻿public static class GameObjectTagNames
 {
+	public const string PowerUp = "PowerUp";
+
 	public const string Gem = "Gem";
 
 	public const string Obstacle = "Obstacle";

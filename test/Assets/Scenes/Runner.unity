@@ -191,7 +191,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1000011021476452, guid: a69481af1a4dc4b519646c7f131c363d, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a69481af1a4dc4b519646c7f131c363d, type: 2}
@@ -289,7 +289,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1000013765661228, guid: 77eebbb3566784bdebc85a6cdd4e8e33, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 77eebbb3566784bdebc85a6cdd4e8e33, type: 2}
@@ -724,7 +724,7 @@ GameObject:
   - 114: {fileID: 650016316}
   - 114: {fileID: 650016315}
   m_Layer: 5
-  m_Name: PowerUpText
+  m_Name: CoinsText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1370,6 +1370,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LogSeverity: 0
+  CoinsButton: {fileID: 510006029}
+  PowerUpsButton: {fileID: 1055038838}
+  CoinsText: {fileID: 650016316}
+  PowerUpsText: {fileID: 855614973}
 --- !u!1 &1110600068
 GameObject:
   m_ObjectHideFlags: 0
@@ -1957,7 +1961,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1000010563095498, guid: 65b19d5bd87e2486f8b34431b63b21d7, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 65b19d5bd87e2486f8b34431b63b21d7, type: 2}
@@ -2187,8 +2191,8 @@ MonoBehaviour:
   _V_CW_Bend_X: 0
   _V_CW_Bend_Y: 0
   _V_CW_Bend_Z: 0
-  _V_CW_Bias_X: 0
-  _V_CW_Bias_Y: 0
+  _V_CW_Bias_X: 1.01
+  _V_CW_Bias_Y: 1.01
   _V_CW_Bias_Z: 0
 --- !u!1001 &1629769706
 Prefab:
@@ -2412,7 +2416,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1000012236298154, guid: dde200efbb925440bb9bb7ad2f9e2345, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dde200efbb925440bb9bb7ad2f9e2345, type: 2}

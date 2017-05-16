@@ -30,7 +30,7 @@ public class SwipeControl : MonoBehaviour, IPointerDownHandler, IDragHandler, IP
 
 	void Update()
 	{
-#if UNITY_EDITOR
+#if UNITY_EDITOR || !MOBILE_INPUT
 		if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.Q))
 		{
 			SendTouchMessage("OnLeft");

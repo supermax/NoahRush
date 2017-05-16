@@ -50,10 +50,13 @@ public class LevelBuilder : ViewModel
 		var startPrefabs = template.StartPrefabs.RandomShuffle();
 		var gapPrefabs = template.GapPrefabs.RandomShuffle();
 		var trapPrefabs = template.TrapPrefabs.RandomShuffle();
+		var coinPrefabs = template.CoinPrefabs.RandomShuffle();
+		var starPrefabs = template.StarPrefabs.RandomShuffle();
 
 		var gapIdx = 0;
 		var defIdx = 0;
 		var levelPrefabs = new List<GameObject>(startPrefabs);
+
 		foreach (var prefab in trapPrefabs)
 		{
 			levelPrefabs.Add(prefab);
@@ -63,7 +66,7 @@ public class LevelBuilder : ViewModel
 				levelPrefabs.Add(template.DefaultPrefabs[defIdx++]);
 			}
 
-			if(gapIdx >= gapPrefabs.GetLength()) continue;
+			if (gapIdx >= gapPrefabs.GetLength()) continue;
 			levelPrefabs.Add(gapPrefabs.ElementAt(gapIdx++));
 
 			if (defIdx >= template.DefaultPrefabs.Length) continue;
@@ -87,7 +90,12 @@ public class LevelBuilder : ViewModel
 		}
 
 		template.LevelGameObjects = levelPrefabs.ToArray();
-		template.LevelLength = Arrange(levelPrefabs, initPos, template.PrefabPosition);
+		template.LevelLength = ArrangeTracks(levelPrefabs, initPos, template.PrefabPosition);
+
+		initPos = new Vector3(initPos.x, initPos.y + 1.5f, initPos.z) + template.PrefabPosition * 2f;
+
+		ArrangeCollectables(coinPrefabs, initPos, template.PrefabPosition);
+		ArrangeCollectables(starPrefabs, initPos, template.PrefabPosition);
 	}
 
 	private static LevelTemplate Clone(LevelTemplate source, Transform parentTransform)
@@ -99,6 +107,8 @@ public class LevelBuilder : ViewModel
 		clone.StartPrefabs = Clone(source.StartPrefabs, parentTransform);
 		clone.DefaultPrefabs = Clone(source.DefaultPrefab, 
 			clone.TrapPrefabs.Length + clone.GapPrefabs.Length, parentTransform);
+		clone.CoinPrefabs = Clone(source.CoinPrefabs, parentTransform);
+		clone.StarPrefabs = Clone(source.StarPrefabs, parentTransform);
 
 		clone.PrefabPosition = source.PrefabPosition;
 
@@ -127,7 +137,43 @@ public class LevelBuilder : ViewModel
 		return clonedPrefabs;
 	}
 
-	private static Vector3 Arrange(IEnumerable<GameObject> prefabs, 
+	private static Vector3 ArrangeCollectables(IEnumerable<GameObject> prefabs, 
+		Vector3 initPos, Vector3 prefabPosition)
+	{
+		prefabPosition /= prefabs.GetLength();
+		var prevPrefabPos = initPos;
+
+		foreach (var prefab in prefabs)
+		{
+			var randomPos = UnityEngine.Random.insideUnitCircle;
+			var x = randomPos.x;
+			if (x < -0.25f)
+			{
+				x = -2f;
+			}
+			else if (x > 0.25f)
+			{
+				x = 2f;
+			}
+			else
+			{
+				x = 0f;
+			}
+			var y = Mathf.Abs(randomPos.y);
+			y = y < 1.5f ? 1.5f : 2f;
+			
+			prevPrefabPos.Set(x, y, prevPrefabPos.z);
+
+			prefab.transform.position = prevPrefabPos;
+			prefab.SetActive(true);
+
+			prevPrefabPos += prefabPosition;
+		}
+
+		return prevPrefabPos;
+	}
+
+	private static Vector3 ArrangeTracks(IEnumerable<GameObject> prefabs,
 		Vector3 initPos, Vector3 prefabPosition)
 	{
 		var prevPrefabPos = initPos.z;

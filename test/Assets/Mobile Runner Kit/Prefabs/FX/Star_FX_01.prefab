@@ -25,7 +25,7 @@ GameObject:
   - 114: {fileID: 114000010046089426}
   m_Layer: 0
   m_Name: Star_FX_01
-  m_TagString: Gem
+  m_TagString: PowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68,6 +68,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LogSeverity: 0
   Action: 1
+  Trigger: 1
+  StartTime: 0
+  Target: {fileID: 0}
 --- !u!198 &198000010693920806
 ParticleSystem:
   m_ObjectHideFlags: 1

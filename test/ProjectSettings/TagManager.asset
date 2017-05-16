@@ -10,6 +10,7 @@ TagManager:
   - DefaultTrack
   - TrapTrack
   - GapTrack
+  - PowerUp
   layers:
   - Default
   - TransparentFX
