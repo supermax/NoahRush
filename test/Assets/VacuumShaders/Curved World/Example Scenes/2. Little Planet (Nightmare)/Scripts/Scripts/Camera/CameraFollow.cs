@@ -21,7 +21,7 @@ namespace CompleteProject
 
         void FixedUpdate ()
         {
-            // Create a position the camera is aiming for based on the offset from the target.
+            // Create a postion the camera is aiming for based on the offset from the target.
             Vector3 targetCamPos = target.position + offset;
 
             // Smoothly interpolate between the camera's current position and it's target position.
