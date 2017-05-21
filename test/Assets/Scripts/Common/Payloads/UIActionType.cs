@@ -5,5 +5,6 @@
 	RestartGame,
 	ResumeGame,
 	QuitGame,
-	ShowSettings
+	ShowSettings,
+	UpdateHud
 }

@@ -59,16 +59,6 @@ public class LevelManager : ViewModel
 
 	private void OnPlayerMove(PlayerMovePayload payload)
 	{
-		//if (_activeLevelBuilder == null)
-		//{
-		//	Debug.LogError("Cannot get active Level Builder!");
-		//	return;
-		//}
-		//var playerPos = payload.PlayerController.transform.position.z;
-		//var levelLength = _activeLevelBuilder.LevelPool.LevelLength.z / 2f;
-		//if (playerPos < levelLength) return;
-		//RebuildLevel(_activeLevelBuilder);
-
 		if (Mathf.Abs(payload.PlayerController.transform.position.z - _prevPlayerPos) < LevelBendMinPlayerMoveOffset) return;
 
 		if (_levelBendHorizontalDir < 0)
@@ -148,17 +138,18 @@ public class LevelManager : ViewModel
 
 	private void OnPlayerTrigger(PlayerTriggerPayload payload)
 	{
+		if (payload == null || payload.TriggerSource == null) return;
+
 		switch (payload.TriggerSource.tag)
 		{
 			case GameObjectTagNames.DefaultTrack:
 				var activeBuilder = payload.TriggerSource.GetComponentInParent<LevelBuilder>();
-				payload.TriggerSource = null;
-
+				
 				if (activeBuilder == null || Equals(_activeLevelBuilder, activeBuilder)) return;
 
+				Debug.LogFormat("Cur. Level: {0}, Next Level: {1}", _activeLevelBuilder, activeBuilder);
 				_activeLevelBuilder = activeBuilder;
-				print("Active Level: " + _activeLevelBuilder.name);
-
+				
 				RebuildLevel();
 				break;
 		}

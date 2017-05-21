@@ -18,6 +18,8 @@ public class MainMenuManager : ViewModelSingleton<MainMenuManager>
 
 	public Button QuitButton;
 
+	public Transform[] MainMenuObjects;
+
 	public Transform[] RunnerObjects;
 
 	public static void SetActive(Transform[] objects, bool isActive)
@@ -71,17 +73,17 @@ public class MainMenuManager : ViewModelSingleton<MainMenuManager>
 
 	public void PauseGame()
 	{
-		gameObject.SetActive(true);
+		SetActive(MainMenuObjects, true);
 	}
 
 	public void ResumeGame()
 	{
-		gameObject.SetActive(false);
+		SetActive(MainMenuObjects, false);
 	}
 
 	public void StartNewGame()
 	{
-		gameObject.SetActive(false);
+		SetActive(MainMenuObjects, false);
 		SetActive(RunnerObjects, true);
 
 		StartNewGameButton.enabled = true;

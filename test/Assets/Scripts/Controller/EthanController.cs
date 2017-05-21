@@ -20,12 +20,13 @@ public class EthanController : ViewModel
 	private bool _isJumping;
 
 	private Vector3 _mainCameraPosOffset;
-	private Transform _mainCameraTransform;
 
 	private Vector3 _moveVector;
 
 	private PlayerMovePayload _playerMovePayload;
 	private PlayerTriggerPayload _playerTriggerPayload;
+
+	public Transform MainCamera;
 
 	public bool JumpOnTurn = true;
 
@@ -65,7 +66,7 @@ public class EthanController : ViewModel
 
 		_initControllerPosition = _character.transform.position;
 		_initControllerRotation = _character.transform.rotation;
-		_mainCameraPosOffset = _mainCameraTransform.position - transform.position;
+		_mainCameraPosOffset = MainCamera.position - transform.position;
 
 		CanRun = true;
 		//OnDown();
@@ -73,15 +74,7 @@ public class EthanController : ViewModel
 
 	private void StartGame()
 	{
-		if (Camera.main == null)
-		{
-			Debug.LogError("Main camera is required for the game!");
-			return;
-		}
-		_mainCameraTransform = Camera.main.transform;
-
-		iTween.Init(_mainCameraTransform.gameObject);
-
+		iTween.Init(MainCamera.gameObject);
 		StartCoroutine(InitPlayer());
 	}
 
@@ -126,6 +119,8 @@ public class EthanController : ViewModel
 		_playerTriggerPayload.TriggerSource = other;
 		
 		Publish(_playerTriggerPayload);
+
+		_playerTriggerPayload.TriggerSource = null;
 	}
 
 	// Fixed update is called in sync with physics
@@ -156,14 +151,14 @@ public class EthanController : ViewModel
 
 		//iTween.MoveUpdate(_mainCameraTransform.gameObject, new Vector3(x / 2, y, z), 0.5f);
 
-		_mainCameraTransform.position = Vector3.Lerp(_mainCameraTransform.position, targetCamPos, CamMoveSpeed * Time.deltaTime);
+		MainCamera.position = Vector3.Lerp(MainCamera.position, targetCamPos, CamMoveSpeed * Time.deltaTime);
 	}
 
 	public void OnLeft()
 	{
 		if (_character.transform.position.x <= -MaxTurnRange)
 		{
-			iTween.ShakePosition(_mainCameraTransform.gameObject, new Vector3(-0.1f, 0f, 0f), 0.5f);
+			iTween.ShakePosition(MainCamera.gameObject, new Vector3(-0.1f, 0f, 0f), 0.5f);
 			return;
 		}
 
@@ -174,7 +169,7 @@ public class EthanController : ViewModel
 	{
 		if (_character.transform.position.x >= MaxTurnRange)
 		{
-			iTween.ShakePosition(_mainCameraTransform.gameObject, new Vector3(0.1f, 0f, 0f), 0.5f);
+			iTween.ShakePosition(MainCamera.gameObject, new Vector3(0.1f, 0f, 0f), 0.5f);
 			return;
 		}
 

@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d256f87270ee3e24c82d940813e6fc5e, type: 3}
+  m_Name: GameBalanceTemplate
+  m_EditorClassIdentifier: 
+  ObjectsBalanceInfo:
+  - Name: PowerUp
+    Type: 3
+    PointsValue: 100
+    CointsValue: 0
+    PowerUpsValue: 1
+  - Name: Gem
+    Type: 4
+    PointsValue: 10
+    CointsValue: 1
+    PowerUpsValue: 0
+  - Name: Trap
+    Type: 1
+    PointsValue: -100
+    CointsValue: -10
+    PowerUpsValue: -5
+  - Name: Obstacle
+    Type: 2
+    PointsValue: -10
+    CointsValue: -1
+    PowerUpsValue: 0
+  - Name: DefaultTrack
+    Type: 5
+    PointsValue: 5
+    CointsValue: 0
+    PowerUpsValue: 0
+  - Name: GapTrack
+    Type: 5
+    PointsValue: 10
+    CointsValue: 0
+    PowerUpsValue: 0
+  - Name: TrapTrack
+    Type: 5
+    PointsValue: 25
+    CointsValue: 0
+    PowerUpsValue: 0
