@@ -10,7 +10,7 @@ public class GameObjectAction : MonoBehaviourBase
 
 	public float StartTime = 0;
 
-	public MonoBehaviour Target;
+	public Behaviour Target;
 
 	protected override void Awake()
 	{

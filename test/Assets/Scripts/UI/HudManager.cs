@@ -24,10 +24,13 @@ public class HudManager : ViewModel
 		PowerUpsButton.gameObject.SetActive(false);
 
 		Subscribe<PlayerTriggerPayload>(OnPlayerTrigger);
+		Subscribe<UIActionPayload>(OnUIAction);
 	}
 
 	private void OnPlayerTrigger(PlayerTriggerPayload payload)
 	{
+		if(payload == null || payload.TriggerSource == null) return;
+
 		switch (payload.TriggerSource.tag)
 		{
 			case GameObjectTagNames.Gem:
@@ -38,6 +41,36 @@ public class HudManager : ViewModel
 			case GameObjectTagNames.PowerUp:
 				PowerUpsText.text = string.Format("{0}", ++_powerUpsCount);
 				PowerUpsButton.gameObject.SetActive(_coinsCount > 0);
+				break;
+		}
+	}
+
+	private void OnUIAction(UIActionPayload payload)
+	{
+		switch (payload.Action)
+		{
+			case UIActionType.StartGame:
+				// TODO
+				break;
+
+			case UIActionType.PauseGame:
+				gameObject.SetActive(false);
+				break;
+
+			case UIActionType.RestartGame:
+				// TODO
+				break;
+
+			case UIActionType.ResumeGame:
+				gameObject.SetActive(true);
+				break;
+
+			case UIActionType.QuitGame:
+				// TODO
+				break;
+
+			case UIActionType.ShowSettings:
+				// TODO
 				break;
 		}
 	}

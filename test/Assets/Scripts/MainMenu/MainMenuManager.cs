@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections;
 using TMS.Common.Core;
+using UnityEditorInternal;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -17,7 +18,15 @@ public class MainMenuManager : ViewModelSingleton<MainMenuManager>
 
 	public Button QuitButton;
 
-	public GameObject EventSystemHolder;
+	public Transform[] RunnerObjects;
+
+	public static void SetActive(Transform[] objects, bool isActive)
+	{
+		foreach (var obj in objects)
+		{
+			obj.gameObject.SetActive(isActive);
+		}
+	}
 
 	protected override void Start()
 	{
@@ -72,41 +81,12 @@ public class MainMenuManager : ViewModelSingleton<MainMenuManager>
 
 	public void StartNewGame()
 	{
-		var scene = SceneManager.GetSceneByName(SceneNames.Runner);
-		if (scene.isLoaded)
-		{
-			gameObject.SetActive(false);
-			return;
-		}
-
-		StartCoroutine(LoadRunnerScene());
-	}
-
-	private IEnumerator LoadRunnerScene()
-	{
-		StartNewGameButton.enabled = false;
-		ResumeGameButton.enabled = false;
-		SettingsButton.enabled = false;
-		StartNewGameText.text = "Loading ...";
-		DestroyImmediate(EventSystemHolder);
-
-		var res = SceneManager.LoadSceneAsync("Runner", LoadSceneMode.Additive);
-		res.allowSceneActivation = false;
-
-		while (!res.isDone)
-		{
-			if (Math.Abs(res.progress - 0.9f) <= 0.1f)
-			{
-				res.allowSceneActivation = true;
-			}
-
-			yield return null;
-		}
+		gameObject.SetActive(false);
+		SetActive(RunnerObjects, true);
 
 		StartNewGameButton.enabled = true;
 		ResumeGameButton.enabled = true;
 		SettingsButton.enabled = true;
-		gameObject.SetActive(false);
 		StartNewGameText.text = "RESTART";
 	}
 

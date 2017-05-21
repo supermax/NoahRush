@@ -49,14 +49,6 @@ public class EthanController : ViewModel
 		_playerTriggerPayload = new PlayerTriggerPayload { PlayerController = this };
 		_character = GetComponent<ThirdPersonCharacter>();
 		
-		if (Camera.main == null)
-		{
-			Debug.LogError("Main camera is required for the game!");
-			return;
-		}
-		_mainCameraTransform = Camera.main.transform;
-		
-		iTween.Init(_mainCameraTransform.gameObject);
 		iTween.Init(_character.gameObject);
 	}
 
@@ -65,7 +57,6 @@ public class EthanController : ViewModel
 		base.Start();
 
 		Subscribe<UIActionPayload>(OnUIAction);
-		StartCoroutine(InitPlayer());
 	}
 
 	private IEnumerator InitPlayer()
@@ -80,11 +71,28 @@ public class EthanController : ViewModel
 		//OnDown();
 	}
 
+	private void StartGame()
+	{
+		if (Camera.main == null)
+		{
+			Debug.LogError("Main camera is required for the game!");
+			return;
+		}
+		_mainCameraTransform = Camera.main.transform;
+
+		iTween.Init(_mainCameraTransform.gameObject);
+
+		StartCoroutine(InitPlayer());
+	}
+
 	private void OnUIAction(UIActionPayload payload)
 	{
 		switch (payload.Action)
 		{
 			case UIActionType.StartGame:
+				StartGame();
+				break;
+
 			case UIActionType.RestartGame:
 				GotoStart();
 				break;
