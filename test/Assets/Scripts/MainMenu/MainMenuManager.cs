@@ -3,6 +3,7 @@
 using TMS.Common.Core;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets.CrossPlatformInput;
 
 #endregion
 
@@ -100,5 +101,13 @@ public class MainMenuManager : ViewModelSingleton<MainMenuManager>
 #if UNITY_ANDROID
 		Application.Quit();
 #endif
+	}
+
+	private void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
+			Publish(new UIActionPayload { Action = UIActionType.QuitGame });
+		}
 	}
 }
