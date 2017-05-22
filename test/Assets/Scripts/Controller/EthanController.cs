@@ -42,40 +42,57 @@ public class EthanController : ViewModel
 
 	public float CamMoveSpeed = 5f;
 
+	private float _defaultTimeScale = 1f;
+
 	protected override void Awake()
 	{
 		base.Awake();
+
+		_defaultTimeScale = Time.timeScale;
 
 		_playerMovePayload = new PlayerMovePayload { PlayerController = this };
 		_playerTriggerPayload = new PlayerTriggerPayload { PlayerController = this };
 		_character = GetComponent<ThirdPersonCharacter>();
 		
-		iTween.Init(_character.gameObject);
+		iTween.Init(MainCamera.gameObject);
 	}
 
 	protected override void Start()
 	{
 		base.Start();
 
-		Subscribe<UIActionPayload>(OnUIAction);
-	}
-
-	private IEnumerator InitPlayer()
-	{
-		yield return new WaitForSeconds(StartRunTime);
-
 		_initControllerPosition = _character.transform.position;
 		_initControllerRotation = _character.transform.rotation;
 		_mainCameraPosOffset = MainCamera.position - transform.position;
 
+		Subscribe<UIActionPayload>(OnUIAction);
+	}
+
+	private IEnumerator StartRunning()
+	{
+		yield return new WaitForSeconds(StartRunTime);
+		
 		CanRun = true;
-		//OnDown();
 	}
 
 	private void StartGame()
 	{
-		iTween.Init(MainCamera.gameObject);
-		StartCoroutine(InitPlayer());
+		StartCoroutine(StartRunning());
+	}
+
+	private void ResumeGame()
+	{
+		CanRun = true;
+		gameObject.SetActive(true);
+		enabled = true;
+		Time.timeScale = _defaultTimeScale;
+	}
+
+	private void PauseGame()
+	{
+		CanRun = false;
+		enabled = false;
+		Time.timeScale = 0f;
 	}
 
 	private void OnUIAction(UIActionPayload payload)
@@ -83,21 +100,18 @@ public class EthanController : ViewModel
 		switch (payload.Action)
 		{
 			case UIActionType.StartGame:
+			case UIActionType.RestartGame:
+				GotoStart();
+				ResumeGame();
 				StartGame();
 				break;
 
-			case UIActionType.RestartGame:
-				GotoStart();
-				break;
-
 			case UIActionType.PauseGame:
-				enabled = false;
-				Time.timeScale = 0f;
+				PauseGame();
 				break;
 
 			case UIActionType.ResumeGame:
-				enabled = true;
-				Time.timeScale = 1f;
+				ResumeGame();
 				break;
 
 			case UIActionType.QuitGame:
@@ -110,6 +124,7 @@ public class EthanController : ViewModel
 
 	public void GotoStart()
 	{
+		_moveVector = _initControllerPosition;
 		_character.transform.position = _initControllerPosition;
 		_character.transform.rotation = _initControllerRotation;
 	}

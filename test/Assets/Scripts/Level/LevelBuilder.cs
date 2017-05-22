@@ -188,19 +188,19 @@ public class LevelBuilder : ViewModel
 		return new Vector3(0, 0, prevPrefabPos);
 	}
 
-	protected override void OnEnable()
-	{
-		base.OnEnable();
+	//protected override void OnEnable()
+	//{
+	//	base.OnEnable();
 
-		_stateChangePayload.State = ScriptStateType.Enabled;
-		Publish(_stateChangePayload);
-	}
+	//	_stateChangePayload.State = ScriptStateType.Enabled;
+	//	Publish(_stateChangePayload);
+	//}
 
-	protected override void OnDisable()
-	{
-		base.OnDisable();
+	//protected override void OnDisable()
+	//{
+	//	base.OnDisable();
 
-		_stateChangePayload.State = ScriptStateType.Disabled;
-		Publish(_stateChangePayload);
-	}
+	//	_stateChangePayload.State = ScriptStateType.Disabled;
+	//	Publish(_stateChangePayload);
+	//}
 }

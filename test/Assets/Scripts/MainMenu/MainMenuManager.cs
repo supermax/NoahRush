@@ -1,33 +1,33 @@
-﻿using System;
-using UnityEngine;
-using System.Collections;
+﻿#region Usings
+
 using TMS.Common.Core;
-using UnityEditorInternal;
-using UnityEngine.SceneManagement;
+using UnityEngine;
 using UnityEngine.UI;
+
+#endregion
 
 public class MainMenuManager : ViewModelSingleton<MainMenuManager>
 {
-	public Text StartNewGameText;
-
-	public Button StartNewGameButton;
-
-	public Button ResumeGameButton;
-
-	public Button SettingsButton;
+	public Transform[] MainMenuObjects;
 
 	public Button QuitButton;
 
-	public Transform[] MainMenuObjects;
+	public Button ResumeGameButton;
+
+	public Transform[] RunnerInGameObjects;
 
 	public Transform[] RunnerObjects;
+
+	public Button SettingsButton;
+
+	public Button StartNewGameButton;
+
+	public Text StartNewGameText;
 
 	public static void SetActive(Transform[] objects, bool isActive)
 	{
 		foreach (var obj in objects)
-		{
 			obj.gameObject.SetActive(isActive);
-		}
 	}
 
 	protected override void Start()
@@ -37,6 +37,7 @@ public class MainMenuManager : ViewModelSingleton<MainMenuManager>
 #if !UNITY_ANDROID
 		QuitButton.gameObject.SetActive(false);
 #endif
+		ResumeGameButton.enabled = true;
 
 		Subscribe<UIActionPayload>(OnUIAction);
 	}
@@ -46,15 +47,12 @@ public class MainMenuManager : ViewModelSingleton<MainMenuManager>
 		switch (payload.Action)
 		{
 			case UIActionType.StartGame:
+			case UIActionType.RestartGame:
 				StartNewGame();
 				break;
 
 			case UIActionType.PauseGame:
 				PauseGame();
-				break;
-
-			case UIActionType.RestartGame:
-				// TODO
 				break;
 
 			case UIActionType.ResumeGame:
@@ -74,27 +72,27 @@ public class MainMenuManager : ViewModelSingleton<MainMenuManager>
 	public void PauseGame()
 	{
 		SetActive(MainMenuObjects, true);
+		SetActive(RunnerInGameObjects, false);
 	}
 
 	public void ResumeGame()
 	{
 		SetActive(MainMenuObjects, false);
+		SetActive(RunnerInGameObjects, true);
 	}
 
 	public void StartNewGame()
 	{
 		SetActive(MainMenuObjects, false);
+		SetActive(RunnerInGameObjects, true);
 		SetActive(RunnerObjects, true);
 
-		StartNewGameButton.enabled = true;
 		ResumeGameButton.enabled = true;
-		SettingsButton.enabled = true;
 		StartNewGameText.text = "RESTART";
 	}
 
 	public void ShowSettings()
 	{
-		
 	}
 
 	public void QuitGame()

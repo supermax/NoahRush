@@ -202,7 +202,7 @@ public class LevelManager : ViewModel
 			return;
 		}
 
-		Subscribe<ScriptStateChangePayload<LevelBuilder>>(OnLevelBuilderStateChange);
+		//Subscribe<ScriptStateChangePayload<LevelBuilder>>(OnLevelBuilderStateChange);
 
 		var templateIndex = 0;
 		LevelBuilder prevBuilder = null;
@@ -235,13 +235,13 @@ public class LevelManager : ViewModel
 		RebuildLevel();
 	}
 
-	private void OnLevelBuilderStateChange(ScriptStateChangePayload<LevelBuilder> payload)
-	{
-		//TODO
+	//private void OnLevelBuilderStateChange(ScriptStateChangePayload<LevelBuilder> payload)
+	//{
+	//	//TODO
 
-		//if (payload.State != ScriptStateType.Enabled) return;
+	//	//if (payload.State != ScriptStateType.Enabled) return;
 
-		//_activeLevelBuilder = payload.Source;
-		//Log("Active Level Builder: {0}", _activeLevelBuilder);
-	}
+	//	//_activeLevelBuilder = payload.Source;
+	//	//Log("Active Level Builder: {0}", _activeLevelBuilder);
+	//}
 }

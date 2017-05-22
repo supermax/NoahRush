@@ -1805,18 +1805,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LogSeverity: 0
-  StartNewGameText: {fileID: 265957561}
-  StartNewGameButton: {fileID: 66705630}
-  ResumeGameButton: {fileID: 1042760195}
-  SettingsButton: {fileID: 1725783641}
-  QuitButton: {fileID: 893391828}
   MainMenuObjects:
   - {fileID: 1085474820}
+  QuitButton: {fileID: 893391828}
+  ResumeGameButton: {fileID: 1042760195}
+  RunnerInGameObjects:
+  - {fileID: 1614907146}
+  - {fileID: 1638398240}
+  - {fileID: 1212872680}
   RunnerObjects:
-  - {fileID: 1250486485}
   - {fileID: 1099984836}
   - {fileID: 1212872680}
   - {fileID: 824758128}
+  SettingsButton: {fileID: 1725783641}
+  StartNewGameButton: {fileID: 66705630}
+  StartNewGameText: {fileID: 265957561}
 --- !u!4 &1009140031
 Transform:
   m_ObjectHideFlags: 0
@@ -2997,7 +3000,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1820, y: 2780}
+  m_SizeDelta: {x: 2000, y: 3000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1281582513
 MonoBehaviour:
