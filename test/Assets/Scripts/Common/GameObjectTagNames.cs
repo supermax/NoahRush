@@ -15,4 +15,6 @@
 	public const string TrapTrack = "TrapTrack";
 
 	public const string GapTrack = "GapTrack";
+
+	public const string Fps = "FPS";
 }

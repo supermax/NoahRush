@@ -1,10 +1,14 @@
 ﻿public enum UIActionType
 {
+	None = 0,
 	StartGame,
 	PauseGame,
 	RestartGame,
 	ResumeGame,
 	QuitGame,
-	ShowSettings,
-	UpdateHud
+	SettingsSwitch,
+	UpdateHud,
+	SoundSwitch,
+	MusicSwitch,
+	FpsSwitch
 }

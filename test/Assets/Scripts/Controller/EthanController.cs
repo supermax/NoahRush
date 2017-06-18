@@ -117,7 +117,7 @@ public class EthanController : ViewModel
 			case UIActionType.QuitGame:
 				break;
 
-			case UIActionType.ShowSettings:
+			case UIActionType.SettingsSwitch:
 				break;
 		}
 	}

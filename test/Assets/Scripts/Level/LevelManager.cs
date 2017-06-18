@@ -173,7 +173,7 @@ public class LevelManager : ViewModel
 			case UIActionType.QuitGame:
 				break;
 
-			case UIActionType.ShowSettings:
+			case UIActionType.SettingsSwitch:
 				break;
 		}
 	}

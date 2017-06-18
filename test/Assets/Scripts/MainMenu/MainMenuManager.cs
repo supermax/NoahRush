@@ -64,8 +64,19 @@ public class MainMenuManager : ViewModelSingleton<MainMenuManager>
 				QuitGame();
 				break;
 
-			case UIActionType.ShowSettings:
+			case UIActionType.SettingsSwitch:
 				ShowSettings();
+				break;
+
+			case UIActionType.FpsSwitch:
+				Application.targetFrameRate = Application.targetFrameRate == 30 ? 60 : 30;
+				Publish(new UIActionPayload<string>
+				{
+					Action = UIActionType.FpsSwitch,
+					Tag = GameObjectTagNames.Fps,
+					Data = string.Format("{0} FPS", Application.targetFrameRate == 30 ? 60 : 30),
+					IsActive = true
+				});
 				break;
 		}
 	}

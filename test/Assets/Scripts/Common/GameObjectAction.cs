@@ -54,6 +54,11 @@ public class GameObjectAction : MonoBehaviourBase
 		DoAction(Action);
 	}
 
+	public virtual void DoAction()
+	{
+		DoAction(Action);
+	}
+
 	public virtual void DoAction(GameObjectActionType action)
 	{
 		if (StartTime <= 0)
