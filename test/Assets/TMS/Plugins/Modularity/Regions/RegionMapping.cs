@@ -13,8 +13,9 @@ namespace TMS.Common.Modularity.Regions
 	/// </summary>
 	public class RegionMapping : ViewModel, IRegion
 	{
-		private static readonly Tuple<RegionViewMappingType, Action<RegionViewMappingPayload>>
-			RegionViewMappingActionsLocker = new Tuple<RegionViewMappingType, Action<RegionViewMappingPayload>>();
+		private static readonly TMS.Common.Core.Tuple<RegionViewMappingType, Action<RegionViewMappingPayload>>
+            RegionViewMappingActionsLocker = 
+			new TMS.Common.Core.Tuple<RegionViewMappingType, Action<RegionViewMappingPayload>>();
 
 		protected static IDictionary<RegionViewMappingType, Action<RegionMapping, RegionViewMappingPayload>> _regionViewMappingActions;
 		
